@@ -5,11 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TodoList-Pure-Redux</title>
+    <link href="./css/style.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container">
-      <aside class="sidebar"></aside>
-      <main class="main"></main>
+      <header class="icon-name">
+        <img src="./images/microsoft-todo-icon.png" />
+        <span>Microsoft To Do</span>
+      </header>
+      <section>
+        <aside class="sidebar">
+          <div class="user-profile">
+            <img
+              src="./images/man.png"
+              class="img-avatar"
+              alt="user image avatar"
+            />
+            <div class="username-eamil">
+              <p>Behanm farhadi</p>
+              <p>behnamfarhadi@gamil.com</p>
+            </div>
+          </div>
+          <div class="search-box">
+            <inpu type="text" name="search" />
+          </div>
+          <div class="default-sidebar-menu">
+            <ul>
+              <li>My Day</li>
+              <li>Important</li>
+              <li>Planned</li>
+              <li>Tasks</li>
+            </ul>
+          </div>
+          <div class="group-list"></div>
+        </aside>
+        <main class="main">My Tasks</main>
+      </section>
     </div>
+    <script src="./js/script.js"></script>
   </body>
 </html>
