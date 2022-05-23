@@ -5,3 +5,45 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  color: #fff;
+}
+.container {
+  display: grid;
+  grid-template-rows: 30px 1fr;
+}
+section {
+  display: flex;
+}
+.icon-name {
+  padding: 10px;
+  background-color: rgb(37, 37, 37);
+}
+.user-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+.img-avatar {
+  width: 48px;
+  height: 48px;
+}
+
+.sidebar {
+  width: 17%;
+  height: 100vh;
+  background-color: rgb(37, 37, 37);
+  padding: 20px 10px 10px 15px;
+  line-height: 1.5;
+}
+
+.default-sidebar-menu ul li {
+  list-style: none;
+}
+
+.main {
+  flex: 1 1 0;
+  height: 100vh;
+  background-color: rgb(102, 100, 100);
+}
