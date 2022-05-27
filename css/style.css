@@ -70,7 +70,7 @@ input.search-task {
   color: rgb(255, 255, 255);
   width: inherit;
   padding: 7px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   border-left: solid 0.5px #2b2b2b;
   border-top: solid 0.5px #2b2b2b;
   border-right: solid 0.5px #2b2b2b;
@@ -91,6 +91,15 @@ input.search-task:focus::placeholder {
 }
 .default-sidebar-menu ul li {
   list-style: none;
+  margin-bottom: 15px;
+}
+.menu {
+  padding-left: 5px;
+}
+.menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 /** Main */
 .main {
