@@ -100,7 +100,7 @@ input.search-task:focus::placeholder {
 }
 .default-sidebar-menu ul li {
   list-style: none;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .menu li {
@@ -111,6 +111,10 @@ input.search-task:focus::placeholder {
   border-radius: 5px;
 }
 .menu li:hover {
+  background-color: #343434;
+}
+
+.active-menu {
   background-color: #343434;
 }
 
