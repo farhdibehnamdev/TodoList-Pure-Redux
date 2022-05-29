@@ -165,9 +165,27 @@ input.search-task:focus::placeholder {
 }
 
 .new-user-list {
+  display: flex;
+  align-items: center;
   padding: 8px;
   border-radius: 5px;
   padding-left: 12px;
+  list-style: none;
+  position: relative;
+  margin-bottom: 10px;
+  margin-right: -10px;
+  margin-left: -10px;
+}
+
+.new-user-list::before {
+  content: "|";
+  font-size: 12px;
+  font-weight: 700;
+  color: #89bce5;
+  background-color: #89bce5;
+  border-radius: 10px;
+  position: absolute;
+  left: 0px;
 }
 
 .group-list {
@@ -177,6 +195,11 @@ input.search-task:focus::placeholder {
   margin-bottom: 15px;
   align-items: center;
 }
+
+.untitled-list {
+  background-color: #0078d7;
+}
+
 .new-list {
   display: flex;
   align-items: center;
@@ -184,6 +207,19 @@ input.search-task:focus::placeholder {
   padding: 8px;
   padding-right: 200px;
   border-radius: 5px;
+}
+
+.list-name {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.rename-list-name {
+  border: 0.5px solid #3c3c3c;
+  border-radius: 5px;
+  border-bottom: solid 2px #76b9ed;
+  outline: none;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 .new-list:hover {
   background-color: #343434;

@@ -2,16 +2,20 @@
 const menu = document.querySelector(".menu");
 const menus = document.querySelectorAll(".menu li");
 const newListBtn = document.querySelector(".new-list-btn");
-const containerGroupList = document.querySelector(".container-group-list");
+const containerGroupList = document.querySelector(".container-group-list ul");
 const addTaskList = function () {
-  const createIcon = document.createElement("i");
-  createIcon.classList.add("ph-list-bold");
-  const createNewList = document.createElement("p");
+  const newIcon = document.createElement("i");
+  newIcon.classList.add("ph-list-bold");
+  newIcon.style.color = "#788CDE";
+  const createNewLIElement = document.createElement("li");
+  const createNewDiv = document.createElement("Div");
   const untitledList = document.createTextNode("Untitled list");
-  createNewList.appendChild(untitledList);
-  createNewList.setAttribute("contenteditable", true);
-  createNewList.classList.add("active-menu", "new-user-list", "hide-before");
-  containerGroupList.insertAdjacentElement("afterend", createNewList);
+  createNewDiv.classList.add("list-name", "rename-list-name", "untitled-list");
+  createNewDiv.appendChild(untitledList);
+  createNewLIElement.append(newIcon, createNewDiv);
+  createNewDiv.setAttribute("contenteditable", true);
+  createNewLIElement.classList.add("active-menu", "new-user-list");
+  containerGroupList.insertAdjacentElement("afterend", createNewLIElement);
 };
 
 /** 
