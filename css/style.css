@@ -262,6 +262,11 @@ input.search-task:focus::placeholder {
   justify-content: space-between;
   align-items: center;
 }
+.header-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .task-title {
   font-size: 30px;
   font-weight: 700;
@@ -269,10 +274,11 @@ input.search-task:focus::placeholder {
   padding: 10px;
 }
 .add-task {
-  margin-bottom: 50px;
+  position: fixed;
+  bottom: 0;
 }
 .main-tasks-container {
-  margin-top: -130px;
+  overflow-y: scroll;
 }
 .add-task input {
   padding: 15px;
@@ -285,13 +291,14 @@ input.search-task:focus::placeholder {
 
 .add-task input:hover {
   background-color: #3b3b3b;
+  color: #fff;
 }
 .task {
   padding: 3px 0 0 0;
 }
 .task p {
   width: 100%;
-  padding: 15px;
+  padding: 25px;
 }
 .task .has-task {
   border-radius: 5px;
@@ -305,6 +312,22 @@ input.search-task:focus::placeholder {
   height: 2px;
   background-color: #262626;
 }
+
+.has-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.check-task-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
 .task .hide-hr {
   display: none;
+}
+.hidden {
+  display: none !important;
 }
