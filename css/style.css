@@ -252,16 +252,15 @@ input.search-task:focus::placeholder {
   flex: 1 1 0;
   background-color: #1c1c1c;
   padding: 30px 50px 10px 50px;
-  height: 100vh;
-}
-.main-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
+
 .main-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  align-items: center;
 }
 .task-title {
   font-size: 30px;
@@ -270,10 +269,11 @@ input.search-task:focus::placeholder {
   padding: 10px;
 }
 .add-task {
-  display: flex;
-  margin-top: auto;
+  margin-bottom: 50px;
 }
-
+.main-tasks-container {
+  margin-top: -130px;
+}
 .add-task input {
   padding: 15px;
   border-radius: 5px;
@@ -307,7 +307,4 @@ input.search-task:focus::placeholder {
 }
 .task .hide-hr {
   display: none;
-}
-.task:last-child {
-  margin-bottom: 80px;
 }
