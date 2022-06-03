@@ -1,8 +1,6 @@
 "use strict";
 
-class Category {
-  constructor() {}
-}
+const init = function () {};
 
 // const menu = document.querySelector(".menu");
 // const menus = document.querySelectorAll(".menu li");

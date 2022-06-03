@@ -2,9 +2,6 @@ const generateId = function () {
   return Math.random(1, 1000);
 };
 class Task {
-  important = [];
-  myDay = [];
-  planned = [];
   tasks = [];
   constructor(title, createdDateTask, completed, isOverDated, subTask) {
     this.id = generateId();
@@ -15,9 +12,8 @@ class Task {
     this.subTask = subTask;
     this.important = this.important;
   }
+  addTask() {}
 }
-
-Task.prototype.addTask = function () {};
 
 const newTask = new Task();
 newTask.addTask();
