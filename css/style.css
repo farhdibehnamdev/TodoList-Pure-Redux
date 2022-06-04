@@ -250,11 +250,19 @@ input.search-task:focus::placeholder {
 *****************/
 .main {
   flex: 1 1 0;
+  overflow-y: scroll;
+  height: 100vh;
+  background-color: #1c1c1c;
+}
+.main-container {
   background-color: #1c1c1c;
   padding: 30px 50px 10px 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: #f6f4f4;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .main-header {
@@ -274,19 +282,25 @@ input.search-task:focus::placeholder {
   padding: 10px;
 }
 .add-task {
+  display: flex;
+  align-items: center;
   position: fixed;
   bottom: 0;
+  width: 100vw;
+  /* background-color: #1c1c1c; */
+  /* background-color: rgb(28, 27, 27, 0.9); */
+  background-color: #1c1c1c;
+  padding: 10px 50px 50px 50px;
 }
-.main-tasks-container {
-  overflow-y: scroll;
-}
+/* .main-tasks-container {
+} */
 .add-task input {
   padding: 15px;
   border-radius: 5px;
   outline: none;
   background-color: #292929;
   border: none;
-  width: 100%;
+  width: 75vw;
 }
 
 .add-task input:hover {
@@ -330,4 +344,18 @@ input.search-task:focus::placeholder {
 }
 .hidden {
   display: none !important;
+}
+/*****************************
+ * Change style of scrollbar
+ *****************************/
+::-webkit-scrollbar {
+  width: 2px;
+}
+::-webkit-scrollbar-track {
+  background-color: #fff;
+  color: #fff;
+}
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(#fff, #a0a2a1);
+  border-radius: 20px;
 }
