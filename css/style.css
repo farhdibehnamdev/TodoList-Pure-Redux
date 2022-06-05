@@ -266,11 +266,23 @@ input.search-task:focus::placeholder {
   font-weight: 400;
 }
 
-.main-header {
+/* .main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 55px 0px 50px;
+} */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 55px 5px 50px;
+  position: fixed;
+  background-color: #1c1c1c;
+  /* left: 20%; */
+  width: 79vw;
+  /* border-radius: 5px; */
+  background: transparent 0.8;
 }
 .header-title {
   display: flex;
