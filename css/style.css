@@ -11,6 +11,7 @@ body {
   height: 100%;
   overflow: hidden;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1c1c1c;
 }
 .container {
   display: grid;
@@ -269,6 +270,7 @@ input.search-task:focus::placeholder {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 55px 0px 50px;
 }
 .header-title {
   display: flex;
@@ -286,11 +288,9 @@ input.search-task:focus::placeholder {
   align-items: center;
   position: fixed;
   bottom: 0;
-  width: 100vw;
-  /* background-color: #1c1c1c; */
-  /* background-color: rgb(28, 27, 27, 0.9); */
+  width: 79vw;
   background-color: #1c1c1c;
-  padding: 10px 50px 50px 50px;
+  padding: 10px 30px 50px 50px;
 }
 /* .main-tasks-container {
 } */
@@ -352,7 +352,7 @@ input.search-task:focus::placeholder {
   width: 2px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #fff;
+  background-color: #1c1c1c;
   color: #fff;
 }
 ::-webkit-scrollbar-thumb {
