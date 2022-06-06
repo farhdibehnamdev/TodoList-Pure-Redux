@@ -1,45 +1,34 @@
+const generatedId = function () {
+  return (
+    Math.random().toString(36).substring(2) + new Date().getTime().toString(36)
+  );
+};
 const init = function () {
-  const generatedId = function () {
-    return (
-      Math.random().toString(36).substring(2) +
-      new Date().getTime().toString(36)
-    );
-  };
-  let data = {
-    tasks: {
-      id: {
-        taskId,
-        title,
-        createdDate,
-        important,
-        completed,
-        isOverDated,
-        planned,
-        myDay,
-        // subTaskId,
-      },
-    },
-  };
+  console.log(generatedId());
+  let data = {};
   return function () {
     let template = function () {
-      let taskList = data.tasks.map((task, index) => {
-        console.log(task);
-        return `
-     <li class="task">
-          <p class="has-task">
-            <span class="check-task-name">
-              <i class="ph-circle-bold icon-task-size"></i>
-              <span>${task}</span>
-            </span>
-            <span class="important-task">
-              <i class="ph-star-bold icon-task-size"></i>
-            </span>
-          </p>
-        </li>
-        `;
+      let html = "";
+
+      const flatData = _.values(data);
+      let taskList = flatData.map((data, index) => {
+        return _.values(data).map((task) => {
+          return `
+        <li class="task" data-id=${task.id}>
+             <p class="has-task">
+               <span class="check-task-name">
+                 <i class="ph-circle-bold icon-task-size"></i>
+                 <span>${task.title}</span>
+               </span>
+               <span class="important-task">
+                 <i class="ph-star-bold icon-task-size"></i>
+               </span>
+             </p>
+           </li>
+           `;
+        });
       });
 
-      let html = "";
       if (taskList.length > 0)
         html += `<ul class="tasks"> ${taskList.join("")} </ul>`;
 
@@ -63,8 +52,6 @@ const init = function () {
     };
 
     let submitHandler = function (event) {
-      console.log(event);
-
       if (!event.target.matches("#add-task-input")) return;
       event.preventDefault();
 
@@ -74,8 +61,9 @@ const init = function () {
       // data.tasks.push(task.value);
       const id = generatedId();
       const newTask = {
-        id: {
+        [id]: {
           id,
+          title: task.value,
           createdDate: Date.now(),
           important: false,
           completed: false,
@@ -84,9 +72,10 @@ const init = function () {
           myDay: false,
         },
       };
-      data = { ...data.tasks, [newTask.id]: newTask.id };
+
+      data = { ...data, [id]: newTask };
+
       // Object.assign(data.tasks, task.value);
-      console.log({ ...data.tasks, newTask });
       render();
 
       task.value = "";
