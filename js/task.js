@@ -1,3 +1,5 @@
+import { addTask } from "../redux/actions/index.js";
+import store from "../redux/store/index.js";
 const generatedId = function () {
   return (
     Math.random().toString(36).substring(2) + new Date().getTime().toString(36)
@@ -5,14 +7,17 @@ const generatedId = function () {
 };
 const init = function () {
   console.log(generatedId());
-  let data = {};
   return function () {
-    let template = function () {
+    const template = function () {
       let html = "";
-
-      const flatData = _.values(data);
+      let state = store.getState();
+      console.log("state : ", state);
+      const flatData = _.values(state);
+      console.log("flatty:", flatData);
       let taskList = flatData.map((data, index) => {
-        return _.values(data).map((task) => {
+        console.log("data ::", data);
+        return _.values(data).map((tsk) => {
+          const { id, task } = tsk;
           return `
         <li class="task" data-id=${task.id}>
              <p class="has-task">
@@ -29,8 +34,12 @@ const init = function () {
         });
       });
 
-      if (taskList.length > 0)
-        html += `<ul class="tasks"> ${taskList.join("")} </ul>`;
+      if (taskList.length > 0) {
+        console.log("tttttt:", taskList);
+        const bag = taskList.join("");
+        console.log("tasdkkkk", bag);
+        html += `<ul class="tasks"> ${taskList} </ul>`;
+      }
 
       return html;
     };
@@ -48,7 +57,7 @@ const init = function () {
       let app = document.querySelector("#app");
       if (!app) return;
       app.innerHTML = template();
-      emitEvent(app, data);
+      emitEvent(app, null);
     };
 
     let submitHandler = function (event) {
@@ -61,19 +70,17 @@ const init = function () {
       // data.tasks.push(task.value);
       const id = generatedId();
       const newTask = {
-        [id]: {
-          id,
-          title: task.value,
-          createdDate: Date.now(),
-          important: false,
-          completed: false,
-          isOverDated: false,
-          planned: false,
-          myDay: false,
-        },
+        id,
+        title: task.value,
+        createdDate: Date.now(),
+        important: false,
+        completed: false,
+        isOverDated: false,
+        planned: false,
+        myDay: false,
       };
 
-      data = { ...data, [id]: newTask };
+      store.dispatch(addTask(id, newTask));
 
       // Object.assign(data.tasks, task.value);
       render();
@@ -88,3 +95,4 @@ const init = function () {
 };
 const render = init();
 render();
+store.subscribe(render);
