@@ -1,9 +1,17 @@
 import store from "../redux/store/index.js";
-import { addTask } from "../redux/actions/index.js";
+import { addTask, setTaskIntoList } from "../redux/actions/index.js";
 import { generatedId } from "../libs/utils.js";
+
+const addTaskHandler = function (id, task) {
+  store.dispatch(addTask(id, task));
+  store.dispatch(setTaskIntoList(id));
+  console.log(store.getState());
+};
 
 (function () {
   let submitHandler = function (event) {
+    console.log(store.getState());
+
     if (!event.target.matches("#add-task-input")) return;
     event.preventDefault();
 
@@ -22,8 +30,7 @@ import { generatedId } from "../libs/utils.js";
       myDay: false,
     };
 
-    store.dispatch(addTask(id, newTask));
-
+    addTaskHandler(id, newTask);
     task.value = "";
     task.focus();
   };
@@ -33,16 +40,14 @@ import { generatedId } from "../libs/utils.js";
 export const TaskViewComponent = function () {
   let state = store.getState();
   let html = "";
-  const flatData = _.values(state);
+  const flatData = _.values(state.tasks);
   let taskList = flatData.map((data, index) => {
-    return _.values(data).map((tsk) => {
-      const { id, task } = tsk;
-      return `
-    <li class="task" data-id=${task.id}>
+    return `
+    <li class="task" data-id=${data?.task?.id}>
          <p class="has-task">
            <span class="check-task-name">
              <i class="ph-circle-bold icon-task-size"></i>
-             <span>${task.title}</span>
+             <span>${data?.task?.title}</span>
            </span>
            <span class="important-task">
              <i class="ph-star-bold icon-task-size"></i>
@@ -50,7 +55,6 @@ export const TaskViewComponent = function () {
          </p>
        </li>
        `;
-    });
   });
 
   if (taskList.length > 0) {
