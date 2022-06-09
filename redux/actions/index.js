@@ -8,9 +8,12 @@ export const addTask = function (id, task) {
     },
   };
 };
-export const setTaskIntoList = function (taskId) {
+export const setTaskIntoList = function (taskId, activeListId) {
   return {
     type: SET_TASK_INTO_LIST,
-    payload: taskId,
+    payload: {
+      taskId,
+      activeListId,
+    },
   };
 };
