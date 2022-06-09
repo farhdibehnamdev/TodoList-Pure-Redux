@@ -2,16 +2,15 @@ import store from "../redux/store/index.js";
 import { addTask, setTaskIntoList } from "../redux/actions/index.js";
 import { generatedId } from "../libs/utils.js";
 
-const addTaskHandler = function (id, task) {
+const addTaskHandler = function (id, task, activeListId) {
   store.dispatch(addTask(id, task));
-  store.dispatch(setTaskIntoList(id));
+  store.dispatch(setTaskIntoList(id, activeListId));
   console.log(store.getState());
 };
 
 (function () {
   let submitHandler = function (event) {
-    console.log(store.getState());
-
+    const { activeListId } = store.getState();
     if (!event.target.matches("#add-task-input")) return;
     event.preventDefault();
 
@@ -30,7 +29,7 @@ const addTaskHandler = function (id, task) {
       myDay: false,
     };
 
-    addTaskHandler(id, newTask);
+    addTaskHandler(id, newTask, activeListId);
     task.value = "";
     task.focus();
   };
@@ -40,8 +39,8 @@ const addTaskHandler = function (id, task) {
 export const TaskViewComponent = function () {
   let state = store.getState();
   let html = "";
-  const flatData = _.values(state.tasks);
-  let taskList = flatData.map((data, index) => {
+  const flatData = _.values(state?.tasks);
+  let taskList = flatData?.map((data, index) => {
     return `
     <li class="task" data-id=${data?.task?.id}>
          <p class="has-task">
