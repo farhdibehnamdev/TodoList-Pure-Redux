@@ -9,7 +9,6 @@ const list = function (state = initialState, action) {
       const loc = arrOfKeys.indexOf(action.payload.activeListId);
       const listId = arrOfKeys[loc]; //List-1
       const newTasksId = [...state[listId].tasksId, action.payload.taskId];
-      console.log(newTasksId);
       const newState = {
         ...state[arrOfKeys[loc]],
         tasksId: newTasksId,

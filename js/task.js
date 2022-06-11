@@ -30,6 +30,7 @@ const addTaskHandler = function (id, task, activeListId) {
     };
 
     addTaskHandler(id, newTask, activeListId);
+
     task.value = "";
     task.focus();
   };

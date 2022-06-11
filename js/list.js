@@ -1,10 +1,7 @@
-const generateId = function () {
-  return Math.random(1, 1000);
+import store from "../redux/store/index.js";
+
+export const DefautListComponent = function () {
+  const { list, activeListId } = store.getState();
+  const listTasks = document.querySelector(".tasks .messages-count");
+  listTasks.innerHTML = list[activeListId].tasksId.length;
 };
-class List {
-  constructor(title, tasks) {
-    id = generateId();
-    this.title = title;
-    this.tasks = tasks;
-  }
-}

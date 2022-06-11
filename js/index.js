@@ -1,9 +1,12 @@
 import store from "../redux/store/index.js";
 import { TaskViewComponent } from "../js/task.js";
+import { DefautListComponent } from "../js/list.js";
+
 (function () {
   const app = document.querySelector("#app");
   store.subscribe(() => {
     app.innerHTML = TaskViewComponent();
+    DefautListComponent();
   });
 })();
 
