@@ -296,8 +296,7 @@ input.search-task:focus::placeholder {
   list-style: none;
 }
 .icon-task-size {
-  font-size: 1.35rem;
-  font-weight: 100;
+  font-size: 1.3rem;
 }
 .task p {
   width: 100%;
@@ -369,6 +368,10 @@ input.search-task:focus::placeholder {
 .add-task input:hover {
   background-color: #3b3b3b;
   color: #fff;
+}
+
+.important-task i:hover {
+  color: #7588d7;
 }
 
 /*==============*/
