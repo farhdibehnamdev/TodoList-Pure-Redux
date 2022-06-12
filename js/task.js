@@ -1,41 +1,55 @@
 import store from "../redux/store/index.js";
-import { addTask, setTaskIntoList } from "../redux/actions/index.js";
+import {
+  addTask,
+  setTaskImportant,
+  setTaskIntoList,
+  setTaskStatus,
+} from "../redux/actions/index.js";
 import { generatedId } from "../libs/utils.js";
 
+// Working with dispatch methods
 const addTaskHandler = function (id, task, activeListId) {
   store.dispatch(addTask(id, task));
   store.dispatch(setTaskIntoList(id, activeListId));
   console.log(store.getState());
 };
 
-(function () {
-  let submitHandler = function (event) {
-    const { activeListId } = store.getState();
-    if (!event.target.matches("#add-task-input")) return;
-    event.preventDefault();
+const setCurrentTaskStatusHandler = function (taskId) {
+  const { tasks } = store.getState();
+  const taskStatusObject = tasks[taskId].task;
+  store.dispatch(setTaskStatus(taskStatusObject));
+};
+const setTaskImportantHandler = function (e) {
+  const taskId = e.target.closest("li").getAttribute("data-id");
+  store.dispatch(setTaskImportant(taskId));
+  setCurrentTaskStatusHandler(taskId);
+};
 
-    let task = event.target.querySelector(".task-input");
-    if (!task || task.value.length < 1) return;
+const submitHandler = function (event) {
+  const { activeListId } = store.getState();
+  if (!event.target.matches("#add-task-input")) return;
+  event.preventDefault();
 
-    const id = generatedId();
-    const newTask = {
-      id,
-      title: task.value,
-      createdDate: Date.now(),
-      important: false,
-      completed: false,
-      isOverDated: false,
-      planned: false,
-      myDay: false,
-    };
+  let task = event.target.querySelector(".task-input");
+  if (!task || task.value.length < 1) return;
 
-    addTaskHandler(id, newTask, activeListId);
-
-    task.value = "";
-    task.focus();
+  const id = generatedId();
+  const newTask = {
+    id,
+    title: task.value,
+    createdDate: Date.now(),
+    important: false,
+    completed: false,
+    isOverDated: false,
+    planned: false,
+    myDay: false,
   };
-  document.addEventListener("submit", submitHandler, false);
-})();
+
+  addTaskHandler(id, newTask, activeListId);
+
+  task.value = "";
+  task.focus();
+};
 
 export const TaskViewComponent = function () {
   let state = store.getState();
@@ -50,7 +64,7 @@ export const TaskViewComponent = function () {
              <span>${data?.task?.title}</span>
            </span>
            <span class="important-task">
-             <i class="ph-star-bold icon-task-size"></i>
+             <i class="ph-star-bold icon-task-size important-task-button"></i>
            </span>
          </p>
        </li>
@@ -64,3 +78,17 @@ export const TaskViewComponent = function () {
 
   return html;
 };
+export const TaskImportantComponent = function () {
+  const { tasksStatus } = store.getState();
+  const currentElement = document.querySelector(".task");
+  currentElement.getAttribute("data-id[]");
+};
+(function () {
+  document.addEventListener("submit", submitHandler, false);
+  const taskElement = document.querySelector("#app");
+  taskElement.addEventListener("click", (e) => {
+    if (e.target.closest("i")) {
+      setTaskImportantHandler(e);
+    }
+  });
+})();
