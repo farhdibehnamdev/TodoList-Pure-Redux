@@ -14,15 +14,9 @@ const addTaskHandler = function (id, task, activeListId) {
   console.log(store.getState());
 };
 
-const setCurrentTaskStatusHandler = function (taskId) {
-  const { tasks } = store.getState();
-  const taskStatusObject = tasks[taskId].task;
-  store.dispatch(setTaskStatus(taskStatusObject));
-};
 const setTaskImportantHandler = function (e) {
   const taskId = e.target.closest("li").getAttribute("data-id");
   store.dispatch(setTaskImportant(taskId));
-  setCurrentTaskStatusHandler(taskId);
 };
 
 const submitHandler = function (event) {
@@ -50,25 +44,29 @@ const submitHandler = function (event) {
   task.value = "";
   task.focus();
 };
-
+const taskUI = function (data) {
+  console.log("data :D:", data);
+  return `<li class="task" draggable="true" data-id=${data?.id}>
+  <p class="has-task">
+    <span class="check-task-name">
+      <i class="ph-circle-bold icon-task-size"></i>
+      <span>${data?.title}</span>
+    </span>
+    <span class="important-task">
+    
+      <i class="${
+        data.important ? "ph-star-fill color-task-important" : "ph-star-bold"
+      } icon-task-size important-task-button"></i>
+    </span>
+  </p>
+</li>`;
+};
 export const TaskViewComponent = function () {
   let state = store.getState();
   let html = "";
   const flatData = _.values(state?.tasks);
   let taskList = flatData?.map((data, index) => {
-    return `
-    <li class="task" data-id=${data?.task?.id}>
-         <p class="has-task">
-           <span class="check-task-name">
-             <i class="ph-circle-bold icon-task-size"></i>
-             <span>${data?.task?.title}</span>
-           </span>
-           <span class="important-task">
-             <i class="ph-star-bold icon-task-size important-task-button"></i>
-           </span>
-         </p>
-       </li>
-       `;
+    return taskUI(data.task);
   });
 
   if (taskList.length > 0) {
@@ -76,13 +74,40 @@ export const TaskViewComponent = function () {
     html += `<ul class="tasks"> ${joined} </ul>`;
   }
 
-  return html;
+  const app = document.querySelector("#app");
+  app.innerHTML = html;
 };
 export const TaskImportantComponent = function () {
-  const { tasksStatus } = store.getState();
-  const currentElement = document.querySelector(".task");
-  currentElement.getAttribute("data-id[]");
+  const state = store.getState();
+  const tasksId = state?.list?.[state?.activeListId]?.tasksId;
+  for (const taskId of tasksId) {
+    const task = state.tasks?.[taskId].task;
+    taskUI(task);
+  }
+  // for()
+  // console.log(currentTaskStatus);
+
+  // if (Object.keys(currentTaskStatus).length > 0) {
+  //   const parentElement = document.querySelector(
+  //     `#app [data-id=${currentTaskStatus?.id}] .important-task`
+  //   );
+  //   console.log(parentElement);
+
+  //   const currentEl = parentElement?.querySelector("i");
+  //   console.log(currentEl);
+
+  //   if (currentTaskStatus.important) {
+  //     currentEl.classList.remove("ph-star-bold");
+  //     currentEl.classList.add("ph-star-fill");
+  //     currentEl.classList.add("color-task-important");
+  //   } else if (!currentTaskStatus.important) {
+  //     currentEl.classList.remove("ph-star-fill");
+  //     currentEl.classList.remove("color-task-important");
+  //     currentEl.classList.add("ph-star-bold");
+  //   }
+  // }
 };
+
 (function () {
   document.addEventListener("submit", submitHandler, false);
   const taskElement = document.querySelector("#app");
