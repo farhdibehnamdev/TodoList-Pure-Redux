@@ -3,7 +3,6 @@ import {
   addTask,
   setTaskImportant,
   setTaskIntoList,
-  setTaskStatus,
 } from "../redux/actions/index.js";
 import { generatedId } from "../libs/utils.js";
 
@@ -16,6 +15,7 @@ const addTaskHandler = function (id, task, activeListId) {
 
 const setTaskImportantHandler = function (e) {
   const taskId = e.target.closest("li").getAttribute("data-id");
+  console.log(taskId);
   store.dispatch(setTaskImportant(taskId));
 };
 
@@ -61,7 +61,7 @@ const taskUI = function (data) {
   </p>
 </li>`;
 };
-export const TaskViewComponent = function () {
+export const AddTask = function () {
   let state = store.getState();
   let html = "";
   const flatData = _.values(state?.tasks);
@@ -77,42 +77,20 @@ export const TaskViewComponent = function () {
   const app = document.querySelector("#app");
   app.innerHTML = html;
 };
-export const TaskImportantComponent = function () {
+export const RenderTask = function () {
   const state = store.getState();
   const tasksId = state?.list?.[state?.activeListId]?.tasksId;
   for (const taskId of tasksId) {
     const task = state.tasks?.[taskId].task;
     taskUI(task);
   }
-  // for()
-  // console.log(currentTaskStatus);
-
-  // if (Object.keys(currentTaskStatus).length > 0) {
-  //   const parentElement = document.querySelector(
-  //     `#app [data-id=${currentTaskStatus?.id}] .important-task`
-  //   );
-  //   console.log(parentElement);
-
-  //   const currentEl = parentElement?.querySelector("i");
-  //   console.log(currentEl);
-
-  //   if (currentTaskStatus.important) {
-  //     currentEl.classList.remove("ph-star-bold");
-  //     currentEl.classList.add("ph-star-fill");
-  //     currentEl.classList.add("color-task-important");
-  //   } else if (!currentTaskStatus.important) {
-  //     currentEl.classList.remove("ph-star-fill");
-  //     currentEl.classList.remove("color-task-important");
-  //     currentEl.classList.add("ph-star-bold");
-  //   }
-  // }
 };
 
 (function () {
   document.addEventListener("submit", submitHandler, false);
-  const taskElement = document.querySelector("#app");
-  taskElement.addEventListener("click", (e) => {
-    if (e.target.closest("i")) {
+  const appElement = document.querySelector("#app");
+  appElement.addEventListener("click", (e) => {
+    if (e.target.classList.contains("important-task-button")) {
       setTaskImportantHandler(e);
     }
   });
