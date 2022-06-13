@@ -374,6 +374,18 @@ input.search-task:focus::placeholder {
   color: #7588d7;
 }
 
+.color-task-important {
+  color: #7588d7;
+}
+
+.menu li {
+  transition-delay: with 0.3s;
+}
+
+.menu li:active {
+  transform: scale(0.98);
+}
+
 /*==============*/
 
 .input-icons i {
