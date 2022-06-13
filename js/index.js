@@ -1,12 +1,12 @@
 import store from "../redux/store/index.js";
-import { TaskViewComponent } from "../js/task.js";
+import { TaskViewComponent, TaskImportantComponent } from "../js/task.js";
 import { DefautListComponent } from "../js/list.js";
 
 (function () {
-  const app = document.querySelector("#app");
   store.subscribe(() => {
-    app.innerHTML = TaskViewComponent();
+    TaskViewComponent();
     DefautListComponent();
+    TaskImportantComponent();
   });
 })();
 
@@ -32,18 +32,18 @@ import { DefautListComponent } from "../js/list.js";
 
 // /**
 // this mehtod add active class one menus by each click */
-// const toggleActiveClassHandler = function (e) {
-//   menus.forEach((menu) => {
-//     menu.classList.remove("active-menu");
-//     menu.classList.add("hide-before");
-//   });
-//   const currentSelectedElement = e.target.className;
-//   menus.forEach((menu) => {
-//     if (menu.className === currentSelectedElement) {
-//       e.target.classList.add("active-menu");
-//       e.target.classList.remove("hide-before");
-//     }
-//   });
-// };
-// menu.addEventListener("click", toggleActiveClassHandler);
-// newListBtn.addEventListener("click", addTaskList);
+const toggleActiveClassHandler = function (e) {
+  menus.forEach((menu) => {
+    menu.classList.remove("active-menu");
+    menu.classList.add("hide-before");
+  });
+  const currentSelectedElement = e.target.className;
+  menus.forEach((menu) => {
+    if (menu.className === currentSelectedElement) {
+      e.target.classList.add("active-menu");
+      e.target.classList.remove("hide-before");
+    }
+  });
+};
+menu.addEventListener("click", toggleActiveClassHandler);
+newListBtn.addEventListener("click", addTaskList);
