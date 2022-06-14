@@ -22,7 +22,7 @@ const setTaskImportantHandler = function (e) {
 };
 
 const setTaskCompletedHandler = function (e) {
-  if (e.target.classList.contains("check-task-name")) {
+  if (e.target.classList.contains("task-completed-circle")) {
     const taskId = e.target.closest("li").getAttribute("data-id");
     store.dispatch(setTaskCompleted(taskId));
   }
@@ -75,9 +75,11 @@ const taskUI = function (data) {
   <p class="has-task">
     <span class="check-task-name">
         <i class="${
-          data?.completed ? "ph-check-circle-light" : "ph-circle-light"
+          data?.completed ? "ph-check-circle-fill" : "ph-circle-light"
         } icon-task-size task-completed-circle"></i>
-      <span>${data?.title}</span>
+      <span class="${data?.completed ? "title-completed" : ""}">${
+    data?.title
+  }</span>
     </span>
     <span class="important-task">
       <i class="${

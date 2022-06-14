@@ -386,6 +386,15 @@ input.search-task:focus::placeholder {
   transform: scale(0.98);
 }
 
+.title-completed {
+  text-decoration: line-through;
+  color: #888888;
+}
+
+.ph-check-circle-fill {
+  color: #7389e0 !important;
+}
+
 /*==============*/
 
 .input-icons i {

@@ -1,5 +1,6 @@
 import {
   ADD_TASK,
+  SET_TASK_COMPLETED,
   SET_TASK_IMPORTANT,
   SET_TASK_INTO_LIST,
   SET_TASK_STATUS,
@@ -32,7 +33,7 @@ export const setTaskImportant = function (taskId) {
 
 export const setTaskCompleted = function (taskId) {
   return {
-    type: SET_TASK_IMPORTANT,
+    type: SET_TASK_COMPLETED,
     payload: taskId,
   };
 };
