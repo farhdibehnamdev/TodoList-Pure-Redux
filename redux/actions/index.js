@@ -30,6 +30,13 @@ export const setTaskImportant = function (taskId) {
   };
 };
 
+export const setTaskCompleted = function (taskId) {
+  return {
+    type: SET_TASK_IMPORTANT,
+    payload: taskId,
+  };
+};
+
 export const setTaskStatus = function (taskStatus) {
   return {
     type: SET_TASK_STATUS,

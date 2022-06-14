@@ -3,6 +3,7 @@ import {
   addTask,
   setTaskImportant,
   setTaskIntoList,
+  setTaskCompleted,
 } from "../redux/actions/index.js";
 import { generatedId } from "../libs/utils.js";
 
@@ -14,9 +15,34 @@ const addTaskHandler = function (id, task, activeListId) {
 };
 
 const setTaskImportantHandler = function (e) {
-  const taskId = e.target.closest("li").getAttribute("data-id");
-  console.log(taskId);
-  store.dispatch(setTaskImportant(taskId));
+  if (e.target.classList.contains("important-task-button")) {
+    const taskId = e.target.closest("li").getAttribute("data-id");
+    store.dispatch(setTaskImportant(taskId));
+  }
+};
+
+const setTaskCompletedHandler = function (e) {
+  if (e.target.classList.contains("check-task-name")) {
+    const taskId = e.target.closest("li").getAttribute("data-id");
+    store.dispatch(setTaskCompleted(taskId));
+  }
+};
+const hoverCompletedHandler = function (e) {
+  if (e.target.classList.contains("task-completed-circle")) {
+    if (e.target.classList.contains("ph-circle-light")) {
+      e.target.classList.add("ph-check-circle-light");
+      e.target.classList.remove("ph-circle-light");
+    }
+  }
+};
+
+const unHoverCompletedHandler = function (e) {
+  if (e.target.classList.contains("task-completed-circle")) {
+    if (e.target.classList.contains("ph-check-circle-light")) {
+      e.target.classList.add("ph-circle-light");
+      e.target.classList.remove("ph-check-circle-light");
+    }
+  }
 };
 
 const submitHandler = function (event) {
@@ -45,17 +71,17 @@ const submitHandler = function (event) {
   task.focus();
 };
 const taskUI = function (data) {
-  console.log("data :D:", data);
   return `<li class="task" draggable="true" data-id=${data?.id}>
   <p class="has-task">
     <span class="check-task-name">
-      <i class="ph-circle-bold icon-task-size"></i>
+        <i class="${
+          data?.completed ? "ph-check-circle-light" : "ph-circle-light"
+        } icon-task-size task-completed-circle"></i>
       <span>${data?.title}</span>
     </span>
     <span class="important-task">
-    
       <i class="${
-        data.important ? "ph-star-fill color-task-important" : "ph-star-bold"
+        data?.important ? "ph-star-fill color-task-important" : "ph-star-bold"
       } icon-task-size important-task-button"></i>
     </span>
   </p>
@@ -90,8 +116,13 @@ export const RenderTask = function () {
   document.addEventListener("submit", submitHandler, false);
   const appElement = document.querySelector("#app");
   appElement.addEventListener("click", (e) => {
-    if (e.target.classList.contains("important-task-button")) {
-      setTaskImportantHandler(e);
-    }
+    setTaskImportantHandler(e);
+    setTaskCompletedHandler(e);
+  });
+  appElement.addEventListener("mouseover", (e) => {
+    hoverCompletedHandler(e);
+  });
+  appElement.addEventListener("mouseout", (e) => {
+    unHoverCompletedHandler(e);
   });
 })();
