@@ -1,4 +1,4 @@
-import store from "../redux/store/index.js";
+import store from "./redux/store";
 
 export const DefautListComponent = function () {
   const { list, activeListId } = store.getState();

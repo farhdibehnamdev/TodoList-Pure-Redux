@@ -1,7 +1,14 @@
-import store from "../redux/store/index.js";
-import { AddTask, RenderTask } from "../js/task.js";
-import { DefautListComponent } from "../js/list.js";
+import icon from "./assets/images/microsoft-todo-icon.png";
+import avatar from "./assets/images/man.png";
+import "./assets/css/style.css";
+import store from "./redux/store";
+import { AddTask, RenderTask } from "./task";
+import { DefautListComponent } from "./list";
 
+const avatarImg = document.querySelector(".img-avatar");
+const iconImg = document.querySelector(".icon-img");
+avatarImg.src = avatar;
+iconImg.src = icon;
 (function () {
   store.subscribe(() => {
     AddTask();

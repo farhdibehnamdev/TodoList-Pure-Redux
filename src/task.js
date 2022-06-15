@@ -1,17 +1,17 @@
-import store from "../redux/store/index.js";
+import _ from "lodash";
+import store from "./redux/store";
 import {
   addTask,
   setTaskImportant,
   setTaskIntoList,
   setTaskCompleted,
-} from "../redux/actions/index.js";
-import { generatedId } from "../libs/utils.js";
+} from "./redux/actions";
+import { generatedId } from "./libs/utils";
 
 // Working with dispatch methods
 const addTaskHandler = function (id, task, activeListId) {
   store.dispatch(addTask(id, task));
   store.dispatch(setTaskIntoList(id, activeListId));
-  console.log(store.getState());
 };
 
 const setTaskImportantHandler = function (e) {

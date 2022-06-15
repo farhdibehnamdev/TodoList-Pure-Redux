@@ -1,9 +1,10 @@
+import { combineReducers } from "redux";
 import tasks from "./tasksReducer.js";
 import activeListId from "./activeListIdReducer.js";
 import list from "./listReducer.js";
 import currentTaskStatus from "./currentTaskStatusReducer.js";
 
-const reducer = Redux.combineReducers({
+const reducer = combineReducers({
   currentTaskStatus,
   tasks,
   activeListId,
