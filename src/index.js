@@ -13,7 +13,7 @@ iconImg.src = icon;
   store.subscribe(() => {
     AddTask();
     DefautListComponent();
-    RenderTask();
+    // RenderTask();
   });
 })();
 
