@@ -4,6 +4,7 @@ import {
   SET_TASK_IMPORTANT,
   SET_TASK_INTO_LIST,
   SET_TASK_STATUS,
+  SET_TASKS_COMLETED_INTO_LIST,
 } from "../constants/action-types.js";
 export const addTask = function (id, task) {
   return {
@@ -35,6 +36,21 @@ export const setTaskCompleted = function (taskId) {
   return {
     type: SET_TASK_COMPLETED,
     payload: taskId,
+  };
+};
+
+export const setTasksCompletedIntoList = function (
+  taskId,
+  activeListId,
+  status
+) {
+  return {
+    type: SET_TASKS_COMLETED_INTO_LIST,
+    payload: {
+      taskId,
+      activeListId,
+      status,
+    },
   };
 };
 

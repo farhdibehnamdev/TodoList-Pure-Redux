@@ -395,6 +395,18 @@ input.search-task:focus::placeholder {
   color: #7389e0 !important;
 }
 
+.completed-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 120px;
+  padding: 7px;
+  background-color: #2a2a2a;
+  border-radius: 5px;
+  margin-bottom: 6px;
+  margin-top: 9px;
+}
+
 /*==============*/
 
 .input-icons i {

@@ -5,6 +5,8 @@ import {
   setTaskImportant,
   setTaskIntoList,
   setTaskCompleted,
+  setTasksCompletedIntoList,
+  setTaskStatus,
 } from "./redux/actions";
 import { generatedId } from "./libs/utils";
 
@@ -22,9 +24,13 @@ const setTaskImportantHandler = function (e) {
 };
 
 const setTaskCompletedHandler = function (e) {
+  const state = store.getState();
   if (e.target.classList.contains("task-completed-circle")) {
     const taskId = e.target.closest("li").getAttribute("data-id");
+    console.log("setTaskComplete ::::", state.tasks[taskId]);
     store.dispatch(setTaskCompleted(taskId));
+    store.dispatch(setTaskStatus(taskId));
+    store.dispatch(setTasksCompletedIntoList(taskId, state.activeListId));
   }
 };
 const hoverCompletedHandler = function (e) {
@@ -70,8 +76,15 @@ const submitHandler = function (event) {
   task.value = "";
   task.focus();
 };
+const TasksCompletedUI = function (taskElement, data) {
+  const completedSection = document.querySelector(
+    "#completed-app .completed-tasks"
+  );
+  completedSection.innerHTML = taskElement;
+};
+
 const taskUI = function (data) {
-  return `<li class="task" draggable="true" data-id=${data?.id}>
+  const taskElement = `<li class="task" draggable="true" data-id=${data?.id}>
   <p class="has-task">
     <span class="check-task-name">
         <i class="${
@@ -87,7 +100,12 @@ const taskUI = function (data) {
       } icon-task-size important-task-button"></i>
     </span>
   </p>
-</li>`;
+</li>
+`;
+  if (!data.completed) return taskElement;
+  else {
+    TasksCompletedUI(taskElement, data);
+  }
 };
 export const AddTask = function () {
   let state = store.getState();
@@ -116,7 +134,7 @@ export const RenderTask = function () {
 
 (function () {
   document.addEventListener("submit", submitHandler, false);
-  const appElement = document.querySelector("#app");
+  const appElement = document.querySelector(".main-tasks-container");
   appElement.addEventListener("click", (e) => {
     setTaskImportantHandler(e);
     setTaskCompletedHandler(e);
