@@ -12,8 +12,12 @@ import { generatedId } from "./libs/utils";
 
 // Working with dispatch methods
 const addTaskHandler = function (id, task, activeListId) {
+  const state = store.getState();
+  const currentTask = state.tasks[id];
+
   store.dispatch(addTask(id, task));
   store.dispatch(setTaskIntoList(id, activeListId));
+  store.dispatch(setTaskStatus(currentTask));
 };
 
 const setTaskImportantHandler = function (e) {
@@ -24,13 +28,20 @@ const setTaskImportantHandler = function (e) {
 };
 
 const setTaskCompletedHandler = function (e) {
-  const state = store.getState();
   if (e.target.classList.contains("task-completed-circle")) {
     const taskId = e.target.closest("li").getAttribute("data-id");
-    console.log("setTaskComplete ::::", state.tasks[taskId]);
     store.dispatch(setTaskCompleted(taskId));
-    store.dispatch(setTaskStatus(taskId));
-    store.dispatch(setTasksCompletedIntoList(taskId, state.activeListId));
+    const state = store.getState();
+    const currentTask = state.tasks[taskId];
+
+    // store.dispatch(setTaskStatus(currentTask));
+    store.dispatch(
+      setTasksCompletedIntoList(
+        taskId,
+        state.activeListId,
+        currentTask.task.completed
+      )
+    );
   }
 };
 const hoverCompletedHandler = function (e) {
@@ -80,6 +91,12 @@ const TasksCompletedUI = function (taskElement, data) {
   const completedSection = document.querySelector(
     "#completed-app .completed-tasks"
   );
+  const state = store.getState();
+  const tasksId = state?.list?.[state?.activeListId]?.tasksId;
+  for (const taskId of tasksId) {
+    const task = state.tasks?.[taskId].task;
+    taskUI(task);
+  }
   completedSection.innerHTML = taskElement;
 };
 
@@ -103,9 +120,9 @@ const taskUI = function (data) {
 </li>
 `;
   if (!data.completed) return taskElement;
-  else {
-    TasksCompletedUI(taskElement, data);
-  }
+  // else {
+  //   TasksCompletedUI(taskElement, data);
+  // }
 };
 export const AddTask = function () {
   let state = store.getState();
@@ -123,14 +140,14 @@ export const AddTask = function () {
   const app = document.querySelector("#app");
   app.innerHTML = html;
 };
-export const RenderTask = function () {
-  const state = store.getState();
-  const tasksId = state?.list?.[state?.activeListId]?.tasksId;
-  for (const taskId of tasksId) {
-    const task = state.tasks?.[taskId].task;
-    taskUI(task);
-  }
-};
+// export const RenderTask = function () {
+//   const state = store.getState();
+//   const tasksId = state?.list?.[state?.activeListId]?.tasksId;
+//   for (const taskId of tasksId) {
+//     const task = state.tasks?.[taskId].task;
+//     taskUI(task);
+//   }
+// };
 
 (function () {
   document.addEventListener("submit", submitHandler, false);
