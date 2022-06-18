@@ -8,6 +8,8 @@ import {
   setTasksCompletedIntoList,
   setTaskStatus,
 } from "./redux/actions";
+import audioAsset from "./assets/audios/CompletedSound.mp3";
+
 import { generatedId } from "./libs/utils";
 
 // Working with dispatch methods
@@ -89,7 +91,7 @@ const submitHandler = function (event) {
   task.focus();
 };
 const playCompletedSound = function () {
-  const audio = new Audio("./assets/audios/CompletedSound.mp3");
+  const audio = new Audio(audioAsset);
   audio.play();
 };
 const renderCompletedTasks = function (data) {
