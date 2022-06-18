@@ -87,17 +87,45 @@ const submitHandler = function (event) {
   task.value = "";
   task.focus();
 };
-const TasksCompletedUI = function (taskElement, data) {
-  const completedSection = document.querySelector(
-    "#completed-app .completed-tasks"
-  );
-  const state = store.getState();
-  const tasksId = state?.list?.[state?.activeListId]?.tasksId;
-  for (const taskId of tasksId) {
-    const task = state.tasks?.[taskId].task;
-    taskUI(task);
+
+const renderCompletedTasks = function (data) {
+  const taskElement = `<li class="task" draggable="true" data-id=${data?.id}>
+  <p class="has-task">
+    <span class="check-task-name">
+        <i class="${
+          data?.completed ? "ph-check-circle-fill" : "ph-circle-light"
+        } icon-task-size task-completed-circle"></i>
+      <span class="${data?.completed ? "title-completed" : ""}">${
+    data?.title
+  }</span>
+    </span>
+    <span class="important-task">
+      <i class="${
+        data?.important ? "ph-star-fill color-task-important" : "ph-star-bold"
+      } icon-task-size important-task-button"></i>
+    </span>
+  </p>
+</li>
+`;
+  return taskElement;
+};
+export const TasksCompletedUI = function () {
+  let state = store.getState();
+  let html = "";
+  const flatData = _.values(state.list[state.activeListId]?.completedTasks);
+  let taskList = flatData?.map((data, index) => {
+    const task = state.tasks[data.id].task;
+    if (data.status) return renderCompletedTasks(task);
+  });
+
+  if (taskList.length > 0) {
+    let joined = taskList.join("").replaceAll(",", "");
+    html += `<ul class="completed-tasks"> ${joined} </ul>`;
   }
-  completedSection.innerHTML = taskElement;
+
+  const completedSection = document.querySelector("#completed-app");
+
+  completedSection.innerHTML = html;
 };
 
 const taskUI = function (data) {
@@ -120,9 +148,6 @@ const taskUI = function (data) {
 </li>
 `;
   if (!data.completed) return taskElement;
-  // else {
-  //   TasksCompletedUI(taskElement, data);
-  // }
 };
 export const AddTask = function () {
   let state = store.getState();
