@@ -2,7 +2,12 @@ import icon from "./assets/images/microsoft-todo-icon.png";
 import avatar from "./assets/images/man.png";
 import "./assets/css/style.css";
 import store from "./redux/store";
-import { AddTask, RenderTask } from "./task";
+import {
+  AddTask,
+  RenderTask,
+  TasksCompletedUI,
+  CompletedTasksCounts,
+} from "./task";
 import { DefautListComponent } from "./list";
 
 const avatarImg = document.querySelector(".img-avatar");
@@ -14,6 +19,8 @@ iconImg.src = icon;
     AddTask();
     DefautListComponent();
     // RenderTask();
+    TasksCompletedUI();
+    CompletedTasksCounts();
   });
 })();
 
