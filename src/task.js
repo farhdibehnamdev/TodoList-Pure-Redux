@@ -30,6 +30,7 @@ const setTaskImportantHandler = function (e) {
 const setTaskCompletedHandler = function (e) {
   if (e.target.classList.contains("task-completed-circle")) {
     const taskId = e.target.closest("li").getAttribute("data-id");
+    playCompletedSound();
     store.dispatch(setTaskCompleted(taskId));
     const state = store.getState();
     const currentTask = state.tasks[taskId];
@@ -87,7 +88,10 @@ const submitHandler = function (event) {
   task.value = "";
   task.focus();
 };
-
+const playCompletedSound = function () {
+  const audio = new Audio("./assets/audios/CompletedSound.mp3");
+  audio.play();
+};
 const renderCompletedTasks = function (data) {
   const taskElement = `<li class="task" draggable="true" data-id=${data?.id}>
   <p class="has-task">
