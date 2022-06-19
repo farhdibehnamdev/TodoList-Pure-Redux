@@ -32,11 +32,10 @@ const setTaskImportantHandler = function (e) {
 const setTaskCompletedHandler = function (e) {
   if (e.target.classList.contains("task-completed-circle")) {
     const taskId = e.target.closest("li").getAttribute("data-id");
-    playCompletedSound();
     store.dispatch(setTaskCompleted(taskId));
     const state = store.getState();
     const currentTask = state.tasks[taskId];
-
+    playCompletedSound(currentTask.task.completed);
     // store.dispatch(setTaskStatus(currentTask));
     store.dispatch(
       setTasksCompletedIntoList(
@@ -90,9 +89,11 @@ const submitHandler = function (event) {
   task.value = "";
   task.focus();
 };
-const playCompletedSound = function () {
-  const audio = new Audio(audioAsset);
-  audio.play();
+const playCompletedSound = function (status) {
+  if (status) {
+    const audio = new Audio(audioAsset);
+    audio.play();
+  }
 };
 const renderCompletedTasks = function (data) {
   const taskElement = `<li class="task" draggable="true" data-id=${data?.id}>
@@ -115,27 +116,19 @@ const renderCompletedTasks = function (data) {
 `;
   return taskElement;
 };
+const toggleCompletedTasks = function (e) {
+  const getCompletedApp = document.querySelector("#completed-app");
 
-export const CompletedTasksCounts = function () {
-  const state = store.getState();
-  const container = document.querySelector(".completed-task-counts");
-  const tasksCount = document.querySelector(
-    ".completed-task-counts .tasks-count"
-  );
-  const tasks = state.list[state.activeListId].tasksId;
-  let counter = 0;
-  tasks.forEach((taskId) => {
-    const task = state.tasks[taskId].task;
-    task.completed === true ? counter++ : counter;
-  });
-  if (counter > 0) {
-    container.classList.remove("hidden");
-    tasksCount.innerHTML = counter;
-  } else {
-    container.classList.add("hidden");
+  if (e.target.classList.contains("ph-caret-down-light")) {
+    e.target.classList.add("ph-caret-right-light");
+    e.target.classList.remove("ph-caret-down-light");
+    getCompletedApp.classList.add("hidden");
+  } else if (e.target.classList.contains("ph-caret-right-light")) {
+    e.target.classList.add("ph-caret-down-light");
+    e.target.classList.remove("ph-caret-right-light");
+    getCompletedApp.classList.remove("hidden");
   }
 };
-
 const taskUI = function (data) {
   const taskElement = `<li class="task" draggable="true" data-id=${data?.id}>
   <p class="has-task">
@@ -156,6 +149,25 @@ const taskUI = function (data) {
 </li>
 `;
   if (!data.completed) return taskElement;
+};
+export const CompletedTasksCounts = function () {
+  const state = store.getState();
+  const container = document.querySelector(".completed-task-counts");
+  const tasksCount = document.querySelector(
+    ".completed-task-counts .tasks-count"
+  );
+  const tasks = state.list[state.activeListId].tasksId;
+  let counter = 0;
+  tasks.forEach((taskId) => {
+    const task = state.tasks[taskId].task;
+    task.completed === true ? counter++ : counter;
+  });
+  if (counter > 0) {
+    container.classList.remove("hidden");
+    tasksCount.innerHTML = counter;
+  } else {
+    container.classList.add("hidden");
+  }
 };
 export const AddTask = function () {
   let state = store.getState();
@@ -204,6 +216,14 @@ export const TasksCompletedUI = function () {
 (function () {
   document.addEventListener("submit", submitHandler, false);
   const appElement = document.querySelector(".main-tasks-container");
+  const tasksCounterContainer = document.querySelector(
+    ".collapse-completed-tasks"
+  );
+
+  tasksCounterContainer?.addEventListener("click", (e) =>
+    toggleCompletedTasks(e)
+  );
+
   appElement.addEventListener("click", (e) => {
     setTaskImportantHandler(e);
     setTaskCompletedHandler(e);
