@@ -339,7 +339,11 @@ input.search-task:focus::placeholder {
 .add-task {
   display: flex;
   align-items: center;
-  position: fixed;
+  /* position: -webkit-sticky;
+  position: sticky; */
+  position: sticky;
+  height: 150px;
+  top: calc(100vh - 150px);
   bottom: 0;
   width: 79vw;
   background-color: #1c1c1c;
