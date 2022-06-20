@@ -1,17 +1,33 @@
 import store from "./redux/store";
 
-export const DefautListComponent = function () {
+const getNumberOfTasks = function (status) {
   const state = store.getState();
-  const listTasks = document.querySelector(".tasks .messages-count");
   const tasks = state.list[state.activeListId].tasksId;
   let counter = 0;
   tasks.forEach((taskId) => {
     const task = state.tasks[taskId].task;
-    task.completed === false ? counter++ : counter;
+    if (status === "important") task[status] === true ? counter++ : counter;
+    else if (status === "completed")
+      task[status] === false ? counter++ : counter;
   });
-  if (counter > 0) {
+  return counter;
+};
+
+export const CountsOfTasks = function () {
+  const listTasks = document.querySelector(".tasks .messages-count");
+  if (getNumberOfTasks("completed") > 0) {
     listTasks.classList.remove("hidden");
-    listTasks.innerHTML = counter ?? "";
+    listTasks.innerHTML = getNumberOfTasks("completed") ?? "";
+  } else {
+    listTasks.classList.add("hidden");
+  }
+};
+
+export const CountsOfImportantTask = function () {
+  const listTasks = document.querySelector(".important .messages-count");
+  if (getNumberOfTasks("important") > 0) {
+    listTasks.classList.remove("hidden");
+    listTasks.innerHTML = getNumberOfTasks("important") ?? "";
   } else {
     listTasks.classList.add("hidden");
   }

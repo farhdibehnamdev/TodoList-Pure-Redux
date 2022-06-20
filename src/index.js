@@ -8,7 +8,7 @@ import {
   TasksCompletedUI,
   CompletedTasksCounts,
 } from "./task";
-import { DefautListComponent } from "./list";
+import { CountsOfImportantTask, CountsOfTasks } from "./list";
 
 const avatarImg = document.querySelector(".img-avatar");
 const iconImg = document.querySelector(".icon-img");
@@ -17,10 +17,11 @@ iconImg.src = icon;
 (function () {
   store.subscribe(() => {
     AddTask();
-    DefautListComponent();
+    CountsOfTasks();
     // RenderTask();
     TasksCompletedUI();
     CompletedTasksCounts();
+    CountsOfImportantTask();
   });
 })();
 
