@@ -14,7 +14,6 @@ iconImg.src = icon;
   store.subscribe(() => {
     AddTask();
     CountsOfTasks();
-    // RenderTask();
     TasksCompletedUI();
     CompletedTasksCounts();
     CountsOfImportantTask();
