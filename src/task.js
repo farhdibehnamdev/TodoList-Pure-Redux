@@ -96,8 +96,11 @@ const playCompletedSound = function (status) {
   }
 };
 const renderCompletedTasks = function (data) {
-  const taskElement = `<li class="task" draggable="true" data-id=${data?.id}>
+  const taskElement = `
+  <li class="task" draggable="true" data-id=${data?.id}>
   <p class="has-task">
+  <span class="drag-icon-check-task">
+  <i class="ph-dots-six-fill"></i>
     <span class="check-task-name">
         <i class="${
           data?.completed ? "ph-check-circle-fill" : "ph-circle-light"
@@ -105,6 +108,7 @@ const renderCompletedTasks = function (data) {
       <span class="${data?.completed ? "title-completed" : ""}">${
     data?.title
   }</span>
+    </span> 
     </span>
     <span class="important-task">
       <i class="${
@@ -130,16 +134,20 @@ const toggleCompletedTasks = function (e) {
   }
 };
 const taskUI = function (data) {
-  const taskElement = `<li class="task" draggable="true" data-id=${data?.id}>
+  const taskElement = `
+  <li class="task" draggable="true" data-id=${data?.id}>
   <p class="has-task">
-    <span class="check-task-name">
-        <i class="${
-          data?.completed ? "ph-check-circle-fill" : "ph-circle-light"
-        } icon-task-size task-completed-circle"></i>
-      <span class="${data?.completed ? "title-completed" : ""}">${
+<span class="drag-icon-check-task">
+<i class="ph-dots-six-fill"></i>
+<span class="check-task-name">
+    <i class="${
+      data?.completed ? "ph-check-circle-fill" : "ph-circle-light"
+    } icon-task-size task-completed-circle"></i>
+  <span class="${data?.completed ? "title-completed" : ""}">${
     data?.title
   }</span>
-    </span>
+</span>
+</span>
     <span class="important-task">
       <i class="${
         data?.important ? "ph-star-fill color-task-important" : "ph-star-bold"
