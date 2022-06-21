@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <script src="https://unpkg.com/phosphor-icons"></script>
   </head>
   <body>
     <div class="container">
@@ -91,18 +90,22 @@
           </div>
           <div class="main-container">
             <div class="main-tasks-container">
-              <div id="app"></div>
-              <div id="completed-task-counts-container">
-                <ul class="completed-task-counts hidden">
-                  <li class="task completed-section">
-                    <i class="ph-caret-down-light collapse-completed-tasks"></i>
-                    <span class="completed-title">Completed</span>
-                    <span class="tasks-count"></span>
-                  </li>
-                </ul>
-              </div>
-              <div id="completed-app">
-                <ul class="completed-tasks"></ul>
+              <div class="lines">
+                <div id="app"></div>
+                <div id="completed-task-counts-container">
+                  <ul class="completed-task-counts hidden">
+                    <li class="task completed-section">
+                      <i
+                        class="ph-caret-down-light collapse-completed-tasks"
+                      ></i>
+                      <span class="completed-title">Completed</span>
+                      <span class="tasks-count"></span>
+                    </li>
+                  </ul>
+                </div>
+                <div id="completed-app">
+                  <ul class="completed-tasks"></ul>
+                </div>
               </div>
             </div>
           </div>

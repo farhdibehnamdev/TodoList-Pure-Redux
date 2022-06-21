@@ -1,17 +1,13 @@
 import icon from "./assets/images/microsoft-todo-icon.png";
 import avatar from "./assets/images/man.png";
 import "./assets/css/style.css";
+import "./assets/css/icons.css";
 import store from "./redux/store";
-import {
-  AddTask,
-  RenderTask,
-  TasksCompletedUI,
-  CompletedTasksCounts,
-} from "./task";
+import { AddTask, TasksCompletedUI, CompletedTasksCounts } from "./task";
 import { CountsOfImportantTask, CountsOfTasks } from "./list";
 
 const avatarImg = document.querySelector(".img-avatar");
-const iconImg = document.querySelector(".icon-img");
+const iconImg = document.querySelector(".img-icon");
 avatarImg.src = avatar;
 iconImg.src = icon;
 (function () {
