@@ -285,6 +285,14 @@ input.search-task:focus::placeholder {
   justify-content: center;
   align-items: center;
 }
+.lines {
+  height: 100vh;
+  background-image: repeating-linear-gradient(
+    #1c1c1c,
+    #1c1c1c 57px,
+    #262626 59px
+  );
+}
 .task-title {
   font-size: 30px;
   font-weight: 700;
@@ -325,6 +333,13 @@ input.search-task:focus::placeholder {
   justify-content: center;
   align-items: center;
   gap: 5px;
+}
+
+.drag-icon-check-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
 
 .hide-hr {
