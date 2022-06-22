@@ -14,71 +14,108 @@
       </header>
       <section>
         <aside class="sidebar">
-          <div class="user-profile">
-            <img class="img-avatar" alt="user image avatar" />
-            <div class="name-eamil">
-              <p class="firstname-family">Behanm farhadi</p>
-              <p class="email">behnamfarhadi@gamil.com</p>
+          <div class="container-sidebar-header">
+            <div class="user-profile">
+              <img class="img-avatar" alt="user image avatar" />
+              <div class="name-eamil">
+                <p class="firstname-family">Behanm farhadi</p>
+                <p class="email">behnamfarhadi@gamil.com</p>
+              </div>
+            </div>
+            <div class="search-box">
+              <input
+                type="text"
+                placeholder="Search"
+                name="search"
+                class="search-task"
+              />
             </div>
           </div>
-          <div class="search-box">
-            <input
-              type="text"
-              placeholder="Search"
-              name="search"
-              class="search-task"
-            />
-          </div>
-          <div class="default-sidebar-menu">
-            <ul class="menu">
-              <li class="myDay hide-before" data-id="MyDay-1">
-                <div>
-                  <i class="ph-sun-bold ph-1x" style="color: #ab999e"></i>
-                  My Day
-                </div>
-                <span class="messages-count"></span>
-              </li>
-              <li class="important hide-before" data-id="Important-2">
-                <div>
-                  <i class="ph-star-bold ph-1x" style="color: #5d7a78"></i
-                  >Important
-                </div>
-                <span class="messages-count hidden"></span>
-              </li>
-              <li class="planned hide-before" data-id="planned-3">
-                <div>
-                  <i class="ph-table-bold ph-1x" style="color: #7c7f81"></i
-                  >Planned
-                </div>
-                <span class="messages-count"></span>
-              </li>
-              <li class="tasks hide-before" data-id="List-1">
-                <div>
-                  <i class="ph-house-bold ph-1x" style="color: #818596"></i
-                  >Tasks
-                </div>
-                <span class="messages-count hidden"></span>
-              </li>
-            </ul>
-          </div>
-          <hr class="line-splitter" />
-          <div class="container-group-list">
-            <ul></ul>
+
+          <div class="sidebar-scrollbar">
+            <div class="default-sidebar-menu">
+              <ul class="menu">
+                <li class="myDay hide-before" data-id="MyDay-1">
+                  <div>
+                    <i class="ph-sun-bold ph-1x" style="color: #ab999e"></i>
+                    My Day
+                  </div>
+                  <span class="messages-count"></span>
+                </li>
+                <li class="important hide-before" data-id="Important-2">
+                  <div>
+                    <i class="ph-star-bold ph-1x" style="color: #5d7a78"></i
+                    >Important
+                  </div>
+                  <span class="messages-count hidden"></span>
+                </li>
+                <li class="planned hide-before" data-id="planned-3">
+                  <div>
+                    <i class="ph-table-bold ph-1x" style="color: #7c7f81"></i
+                    >Planned
+                  </div>
+                  <span class="messages-count"></span>
+                </li>
+                <li class="tasks hide-before" data-id="List-1">
+                  <div>
+                    <i class="ph-house-bold ph-1x" style="color: #818596"></i
+                    >Tasks
+                  </div>
+                  <span class="messages-count hidden"></span>
+                </li>
+              </ul>
+            </div>
+            <hr class="line-splitter" />
+            <div class="container-group-list">
+              <ul>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+                <li>a</li>
+              </ul>
+            </div>
           </div>
           <div class="group-list">
             <div class="new-list">
               <i class="ph-plus-bold ph-1x"></i
-              ><span class="new-list-btn"> New list </span>
+              ><input class="addList" placeholder="New List" />
             </div>
             <div class="new-group">
               <i class="ph-folder-plus-bold ph-1x"></i>
               <!-- <img class="img-newGroup" alt="create new group for list" /> -->
             </div>
-            <div></div>
           </div>
         </aside>
         <main class="main">
           <div class="main-header">
+            <!-- <div class="main-header-container"> -->
             <div class="header-title">
               <i class="ph-house-bold ph-2x" style="color: #788cde"></i>
               <span class="task-title">Tasks</span>
@@ -88,6 +125,7 @@
               <span class="list-options">...</span>
             </div>
           </div>
+          <!-- </div> -->
           <div class="main-container">
             <div class="main-tasks-container">
               <div id="app"></div>

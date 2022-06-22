@@ -5,7 +5,6 @@ import "./assets/css/icons.css";
 import store from "./redux/store";
 import { AddTask, TasksCompletedUI, CompletedTasksCounts } from "./task";
 import { CountsOfImportantTask, CountsOfTasks } from "./list";
-
 const avatarImg = document.querySelector(".img-avatar");
 const iconImg = document.querySelector(".img-icon");
 avatarImg.src = avatar;
