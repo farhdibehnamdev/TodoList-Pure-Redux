@@ -95,7 +95,7 @@ input.search-task:focus {
 
 ::placeholder {
   /* color: #6e77b5; */
-  color: #ceafa1;
+  color: #ede3de;
   display: flex;
   align-items: center;
   font-weight: 500;
@@ -183,7 +183,7 @@ input.search-task:focus::placeholder {
   background-color: #323232;
   margin-bottom: 10px;
 }
-.container-group-list ul li {
+.list-placeholder ul li {
   padding-left: 10px;
   list-style: none;
 }
@@ -263,6 +263,7 @@ input.search-task:focus::placeholder {
   padding: 10px;
   border-radius: 5px;
   color: #fff;
+  flex: 1;
 }
 
 .new-group {
