@@ -7,6 +7,7 @@ module.exports = {
     bundle: [
       path.resolve(__dirname, "src/index.js"),
       path.resolve(__dirname, "src/task.js"),
+      path.resolve(__dirname, "src/list.js"),
     ],
   },
   output: {
