@@ -12,23 +12,15 @@ import audioAsset from "./assets/audios/CompletedSound.mp3";
 
 import { generatedId } from "./libs/utils";
 
-// Working with dispatch methods
-const addTaskToStore = function (id, task, activeListId) {
-  const state = store.getState();
-  const currentTask = state.tasks[id];
-
-  store.dispatch(addTask(id, task));
-  store.dispatch(setTaskIntoList(id, activeListId));
-  store.dispatch(setTaskStatus(currentTask));
-};
-
 const setTaskImportantHandler = function (e) {
   if (e.target.classList.contains("important-task-button")) {
     const taskId = e.target.closest("li").getAttribute("data-id");
     store.dispatch(setTaskImportant(taskId));
   }
 };
-
+//****************************************** */
+//  These functions working on completion tasks
+//***************************************** */
 const setTaskCompletedHandler = function (e) {
   if (e.target.classList.contains("task-completed-circle")) {
     const taskId = e.target.closest("li").getAttribute("data-id");
@@ -54,7 +46,6 @@ const hoverCompletedHandler = function (e) {
     }
   }
 };
-
 const unHoverCompletedHandler = function (e) {
   if (e.target.classList.contains("task-completed-circle")) {
     if (e.target.classList.contains("ph-check-circle-light")) {
@@ -62,32 +53,6 @@ const unHoverCompletedHandler = function (e) {
       e.target.classList.remove("ph-check-circle-light");
     }
   }
-};
-
-const submitHandler = function (event) {
-  const { activeListId } = store.getState();
-  if (!event.target.matches("#add-task-input")) return;
-  event.preventDefault();
-
-  let task = event.target.querySelector(".task-input");
-  if (!task || task.value.length < 1) return;
-
-  const id = generatedId("task-");
-  const newTask = {
-    id,
-    title: task.value,
-    createdDate: Date.now(),
-    important: false,
-    completed: false,
-    isOverDated: false,
-    planned: false,
-    myDay: false,
-  };
-
-  addTaskToStore(id, newTask, activeListId);
-
-  task.value = "";
-  task.focus();
 };
 const playCompletedSound = function (status) {
   if (status) {
@@ -133,6 +98,73 @@ const toggleCompletedTasks = function (e) {
     getCompletedApp.classList.remove("hidden");
   }
 };
+export const TasksCompletedUI = function () {
+  let state = store.getState();
+  let html = "";
+  const flatData = _.values(state.list[state.activeListId]?.completedTasks);
+  let taskList = flatData?.map((data, index) => {
+    const task = state.tasks[data.id].task;
+    if (data.status) return renderCompletedTasks(task);
+  });
+
+  if (taskList.length > 0) {
+    let joined = taskList.join("").replaceAll(",", "");
+    html += `<ul class="completed-tasks"> ${joined} </ul>`;
+  }
+
+  const completedSection = document.querySelector("#completed-app");
+
+  completedSection.innerHTML = html;
+};
+export const CompletedTasksCounts = function () {
+  const state = store.getState();
+  const container = document.querySelector(".completed-task-counts");
+  const tasksCount = document.querySelector(
+    ".completed-task-counts .tasks-count"
+  );
+  const tasks = state.list[state.activeListId].tasksId;
+  let counter = 0;
+  tasks.forEach((taskId) => {
+    const task = state.tasks[taskId].task;
+    task.completed === true ? counter++ : counter;
+  });
+  if (counter > 0) {
+    container.classList.remove("hidden");
+    tasksCount.innerHTML = counter;
+  } else {
+    container.classList.add("hidden");
+  }
+};
+//#################################################
+
+//****************************************** */
+//  These functions working on adding tasks
+//***************************************** */
+const submitHandler = function (event) {
+  const { activeListId } = store.getState();
+  if (!event.target.matches("#add-task-input")) return;
+  event.preventDefault();
+
+  let task = event.target.querySelector(".task-input");
+  if (!task || task.value.length < 1) return;
+
+  const id = generatedId("task-");
+  const newTask = {
+    id,
+    title: task.value,
+    createdDate: Date.now(),
+    important: false,
+    completed: false,
+    isOverDated: false,
+    planned: false,
+    myDay: false,
+  };
+
+  addTaskToStore(id, newTask, activeListId);
+
+  task.value = "";
+  task.focus();
+};
 const taskUI = function (data) {
   const taskElement = `
   <li class="task" draggable="true" data-id=${data?.id}>
@@ -158,24 +190,13 @@ const taskUI = function (data) {
 `;
   if (!data.completed) return taskElement;
 };
-export const CompletedTasksCounts = function () {
+const addTaskToStore = function (id, task, activeListId) {
   const state = store.getState();
-  const container = document.querySelector(".completed-task-counts");
-  const tasksCount = document.querySelector(
-    ".completed-task-counts .tasks-count"
-  );
-  const tasks = state.list[state.activeListId].tasksId;
-  let counter = 0;
-  tasks.forEach((taskId) => {
-    const task = state.tasks[taskId].task;
-    task.completed === true ? counter++ : counter;
-  });
-  if (counter > 0) {
-    container.classList.remove("hidden");
-    tasksCount.innerHTML = counter;
-  } else {
-    container.classList.add("hidden");
-  }
+  const currentTask = state.tasks[id];
+
+  store.dispatch(addTask(id, task));
+  store.dispatch(setTaskIntoList(id, activeListId));
+  store.dispatch(setTaskStatus(currentTask));
 };
 export const AddTask = function () {
   let state = store.getState();
@@ -193,33 +214,7 @@ export const AddTask = function () {
   const app = document.querySelector("#app");
   app.innerHTML = html;
 };
-export const TasksCompletedUI = function () {
-  let state = store.getState();
-  let html = "";
-  const flatData = _.values(state.list[state.activeListId]?.completedTasks);
-  let taskList = flatData?.map((data, index) => {
-    const task = state.tasks[data.id].task;
-    if (data.status) return renderCompletedTasks(task);
-  });
-
-  if (taskList.length > 0) {
-    let joined = taskList.join("").replaceAll(",", "");
-    html += `<ul class="completed-tasks"> ${joined} </ul>`;
-  }
-
-  const completedSection = document.querySelector("#completed-app");
-
-  completedSection.innerHTML = html;
-};
-
-// export const RenderTask = function () {
-//   const state = store.getState();
-//   const tasksId = state?.list?.[state?.activeListId]?.tasksId;
-//   for (const taskId of tasksId) {
-//     const task = state.tasks?.[taskId].task;
-//     taskUI(task);
-//   }
-// };
+//********************************************* */
 
 (function () {
   document.addEventListener("submit", submitHandler, false);
