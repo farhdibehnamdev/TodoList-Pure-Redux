@@ -116,14 +116,15 @@ input.search-task:focus::placeholder {
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;
-  /* padding: 20px 15px; */
-  padding-left: 10px;
 }
+/* .default-sidebar-menu {
+  padding: 10px 20px;
+} */
 .default-sidebar-menu ul li {
   list-style: none;
   margin-bottom: 5px;
   margin-right: -10px;
-  margin-left: -10px;
+  padding-left: 20px;
 }
 
 .menu li {
@@ -132,7 +133,7 @@ input.search-task:focus::placeholder {
   align-items: center;
   padding: 8px;
   border-radius: 5px;
-  padding-left: 12px;
+  /* padding-left: 12px; */
   position: relative;
 }
 .menu li:hover {
@@ -183,11 +184,44 @@ input.search-task:focus::placeholder {
   background-color: #323232;
   margin-bottom: 10px;
 }
-.list-placeholder ul li {
-  padding-left: 10px;
+#list-placeholder {
+  margin: 0 5px 0 5px;
+}
+#list-placeholder .lists .list {
   list-style: none;
 }
-
+.list {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 5px 8px 19px;
+  border-radius: 5px;
+  position: relative;
+}
+.list:hover {
+  background-color: #343434;
+}
+.list::before {
+  content: "|";
+  font-size: 12px;
+  font-weight: 700;
+  color: #89bce5;
+  background-color: #89bce5;
+  border-radius: 10px;
+  position: absolute;
+  left: 0px;
+}
+.lists .list:active {
+  transform: scale(0.98);
+}
+.hover-sidebar {
+  background-color: #343434;
+}
+.list > *,
+.default-list > * {
+  pointer-events: none;
+}
+/* 
 .new-user-list {
   display: flex;
   align-items: center;
@@ -201,16 +235,7 @@ input.search-task:focus::placeholder {
   margin-left: -10px;
 }
 
-.new-user-list::before {
-  content: "|";
-  font-size: 12px;
-  font-weight: 700;
-  color: #89bce5;
-  background-color: #89bce5;
-  border-radius: 10px;
-  position: absolute;
-  left: 0px;
-}
+*/
 
 .group-list {
   display: flex;
@@ -320,7 +345,7 @@ input.search-task:focus::placeholder {
 .lines {
   margin: 0 60px;
   flex: 1;
-  background: linear-gradient(#1c1c1c, #1c1c1c 54px, #262626 48px);
+  background: linear-gradient(#1c1c1c, #1c1c1c 50px, #262626);
   background-size: 100% 55px;
 }
 .task-title {
@@ -426,13 +451,27 @@ input.search-task:focus::placeholder {
 .color-task-important {
   color: #7588d7;
 }
-
+.menu {
+  margin-left: 5px;
+  padding: 5px 0 0px 0;
+}
 .menu li {
   transition-delay: with 0.3s;
 }
 
 .menu li:active {
   transform: scale(0.98);
+}
+
+.menu li::before {
+  content: "|";
+  font-size: 12px;
+  font-weight: 700;
+  color: #89bce5;
+  background-color: #89bce5;
+  border-radius: 10px;
+  position: absolute;
+  left: 0px;
 }
 
 .title-completed {

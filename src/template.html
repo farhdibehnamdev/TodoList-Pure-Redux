@@ -35,28 +35,34 @@
           <div class="sidebar-scrollbar">
             <div class="default-sidebar-menu">
               <ul class="menu">
-                <li class="myDay hide-before" data-id="MyDay-1">
+                <li class="myDay default-list hide-before" data-id="MyDay-1">
                   <div>
                     <i class="ph-sun-bold ph-1x" style="color: #ab999e"></i>
                     My Day
                   </div>
                   <span class="messages-count"></span>
                 </li>
-                <li class="important hide-before" data-id="Important-2">
+                <li
+                  class="important default-list hide-before"
+                  data-id="Important-2"
+                >
                   <div>
                     <i class="ph-star-bold ph-1x" style="color: #5d7a78"></i
                     >Important
                   </div>
                   <span class="messages-count hidden"></span>
                 </li>
-                <li class="planned hide-before" data-id="planned-3">
+                <li
+                  class="planned default-list hide-before"
+                  data-id="planned-3"
+                >
                   <div>
                     <i class="ph-table-bold ph-1x" style="color: #7c7f81"></i
                     >Planned
                   </div>
                   <span class="messages-count"></span>
                 </li>
-                <li class="tasks hide-before" data-id="List-1">
+                <li class="tasks default-list hide-before" data-id="List-1">
                   <div>
                     <i class="ph-house-bold ph-1x" style="color: #818596"></i
                     >Tasks
@@ -67,18 +73,10 @@
             </div>
             <hr class="line-splitter" />
             <div id="list-placeholder">
-              <ul class="list">
-                <li>
+              <ul class="lists">
+                <li class="list hide-before" draggable="true" data-id="salam">
                   <i class="ph-list-light ph-1x" style="color: #788cde"></i>
-                  a
-                </li>
-                <li>
-                  <i class="ph-list-light ph-1x" style="color: #788cde"></i>
-                  b
-                </li>
-                <li>
-                  <i class="ph-list-light ph-1x" style="color: #788cde"></i>
-                  c
+                  <span>New List</span>
                 </li>
               </ul>
             </div>

@@ -1,8 +1,7 @@
 import { generatedId } from "./libs/utils";
 import { addList } from "./redux/actions";
-import activeListId from "./redux/reducers/activeListIdReducer";
 import store from "./redux/store";
-
+const sidebarScrollbar = document.querySelector(".sidebar-scrollbar");
 const getNumberOfTasks = function (status) {
   const state = store.getState();
   const tasks = state.list[state.activeListId].tasksId;
@@ -56,7 +55,35 @@ const listHandler = function (event) {
   }
 };
 
+const createList = function () {
+  const listElement = `<li class=""></li>`;
+};
+const removeHover = function (e) {
+  const liElements = sidebarScrollbar.querySelectorAll("li");
+  liElements.forEach((li) => {
+    li.classList.remove("hover-sidebar");
+    li.classList.add("hide-before");
+  });
+};
+const hoverHandler = function (e) {
+  if (
+    e.target.classList.contains("list") ||
+    e.target.classList.contains("default-list")
+  ) {
+    if (e.target.classList.contains("hide-before")) {
+      removeHover();
+      e.target.classList.remove("hide-before");
+      e.target.classList.add("hover-sidebar");
+    } else if (e.target.classList.contains("hover-sidebar")) {
+      removeHover();
+      e.target.classList.remove("hover-sidebar");
+      e.target.classList.add("hide-before");
+    }
+  }
+};
+
 (function () {
+  sidebarScrollbar.addEventListener("click", hoverHandler.bind(this));
   const addList = document.querySelector(".addList");
   addList.addEventListener("keydown", listHandler.bind(this));
 })();
