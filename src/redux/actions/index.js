@@ -5,6 +5,7 @@ import {
   SET_TASK_INTO_LIST,
   SET_TASK_STATUS,
   SET_TASKS_COMLETED_INTO_LIST,
+  ADD_LIST,
 } from "../constants/action-types.js";
 export const addTask = function (id, task) {
   return {
@@ -12,6 +13,16 @@ export const addTask = function (id, task) {
     payload: {
       id,
       task,
+    },
+  };
+};
+
+export const addList = function (id, title) {
+  return {
+    type: ADD_LIST,
+    payload: {
+      id,
+      title,
     },
   };
 };

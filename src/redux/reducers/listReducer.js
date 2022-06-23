@@ -66,6 +66,20 @@ const list = function (state = initialState, action) {
       // });
       const [listId, newState] = listManipulation("tasksId");
       return { ...state, [listId]: { ...newState } };
+    case ADD_LIST:
+      const newList = {
+        ...state.list,
+        [action.payload.id]: {
+          id: action.payload.id,
+          title: action.payload.title,
+          tasksId: [],
+          completedTasks: {},
+        },
+      };
+      return {
+        ...state,
+        ...newList,
+      };
     default:
       return state;
   }

@@ -1,3 +1,6 @@
+import { generatedId } from "./libs/utils";
+import { addList } from "./redux/actions";
+import activeListId from "./redux/reducers/activeListIdReducer";
 import store from "./redux/store";
 
 const getNumberOfTasks = function (status) {
@@ -32,3 +35,28 @@ export const CountsOfImportantTask = function () {
     listTasks.classList.add("hidden");
   }
 };
+
+const addListToStore = function (id, title) {
+  const state = store.getState();
+  store.dispatch(addList(id, title));
+};
+
+const listHandler = function (event) {
+  if (event.key === "Enter") {
+    let title = event.target.value;
+    if (!title || title.length < 1) return;
+    const id = generatedId("list-");
+    const newList = {
+      id,
+      title,
+    };
+    addListToStore(id, newList);
+    event.target.value = "";
+    event.target.focus();
+  }
+};
+
+(function () {
+  const addList = document.querySelector(".addList");
+  addList.addEventListener("keydown", listHandler.bind(this));
+})();
