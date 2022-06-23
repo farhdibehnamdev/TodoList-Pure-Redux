@@ -13,7 +13,7 @@ import audioAsset from "./assets/audios/CompletedSound.mp3";
 import { generatedId } from "./libs/utils";
 
 // Working with dispatch methods
-const addTaskHandler = function (id, task, activeListId) {
+const addTaskToStore = function (id, task, activeListId) {
   const state = store.getState();
   const currentTask = state.tasks[id];
 
@@ -72,7 +72,7 @@ const submitHandler = function (event) {
   let task = event.target.querySelector(".task-input");
   if (!task || task.value.length < 1) return;
 
-  const id = generatedId();
+  const id = generatedId("task-");
   const newTask = {
     id,
     title: task.value,
@@ -84,7 +84,7 @@ const submitHandler = function (event) {
     myDay: false,
   };
 
-  addTaskHandler(id, newTask, activeListId);
+  addTaskToStore(id, newTask, activeListId);
 
   task.value = "";
   task.focus();
