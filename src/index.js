@@ -4,7 +4,7 @@ import "./assets/css/style.css";
 import "./assets/css/icons.css";
 import store from "./redux/store";
 import { AddTask, TasksCompletedUI, CompletedTasksCounts } from "./task";
-import { CountsOfImportantTask, CountsOfTasks } from "./list";
+import { CountsOfImportantTask, CountsOfTasks, RenderList } from "./list";
 const avatarImg = document.querySelector(".img-avatar");
 const iconImg = document.querySelector(".img-icon");
 avatarImg.src = avatar;
@@ -12,6 +12,7 @@ iconImg.src = icon;
 (function () {
   store.subscribe(() => {
     AddTask();
+    RenderList();
     CountsOfTasks();
     TasksCompletedUI();
     CompletedTasksCounts();

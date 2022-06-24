@@ -35,8 +35,6 @@ export const CountsOfImportantTask = function () {
 };
 
 const addListToStore = function (id, title) {
-  const state = store.getState();
-  console.log("gooz", title);
   store.dispatch(addList(id, title));
 };
 
@@ -45,11 +43,7 @@ const listHandler = function (event) {
     let title = event.target.value;
     if (!title || title.length < 1) return;
     const id = generatedId("list-");
-    const newList = {
-      id,
-      title,
-    };
-    addListToStore(id, newList);
+    addListToStore(id, title);
     event.target.value = "";
     event.target.focus();
   }
@@ -59,7 +53,7 @@ export const RenderList = function () {
   let html = "";
 
   const list = Object.values(state?.list).map((data, index) => {
-    return createList({ id: data.id, title: data.title.title });
+    return createList({ id: data.id, title: data.title });
   });
   if (list.length > 0) {
     let joined = list.join("").replaceAll(",", "");
@@ -71,7 +65,7 @@ export const RenderList = function () {
 };
 
 const createList = function (data) {
-  if (data.title !== "List-1") {
+  if (data.title !== "Tasks") {
     const listElement = `<li class="list hide-before" draggable="true" data-id=${data.id}>
     <i class="ph-list-light ph-1x" style="color: #788cde"></i>
     <span>${data.title}</span>
