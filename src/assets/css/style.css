@@ -197,6 +197,7 @@ input.search-task:focus::placeholder {
   padding: 8px 5px 8px 19px;
   border-radius: 5px;
   position: relative;
+  margin-bottom: 5px;
 }
 .list:hover {
   background-color: #343434;
