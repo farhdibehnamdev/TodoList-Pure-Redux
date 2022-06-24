@@ -1,7 +1,6 @@
 import { generatedId } from "./libs/utils";
 import { addList } from "./redux/actions";
 import store from "./redux/store";
-const sidebarScrollbar = document.querySelector(".sidebar-scrollbar");
 const getNumberOfTasks = function (status) {
   const state = store.getState();
   const tasks = state.list[state.activeListId].tasksId;
@@ -37,6 +36,7 @@ export const CountsOfImportantTask = function () {
 
 const addListToStore = function (id, title) {
   const state = store.getState();
+  console.log("gooz", title);
   store.dispatch(addList(id, title));
 };
 
@@ -54,12 +54,34 @@ const listHandler = function (event) {
     event.target.focus();
   }
 };
+export const RenderList = function () {
+  let state = store.getState();
+  let html = "";
 
-const createList = function () {
-  const listElement = `<li class=""></li>`;
+  const list = Object.values(state?.list).map((data, index) => {
+    return createList({ id: data.id, title: data.title.title });
+  });
+  if (list.length > 0) {
+    let joined = list.join("").replaceAll(",", "");
+    html += `<ul class="lists"> ${joined} </ul>`;
+  }
+
+  const listPlaceHolder = document.querySelector("#list-placeholder");
+  listPlaceHolder.innerHTML = html;
 };
+
+const createList = function (data) {
+  if (data.title !== "List-1") {
+    const listElement = `<li class="list hide-before" draggable="true" data-id=${data.id}>
+    <i class="ph-list-light ph-1x" style="color: #788cde"></i>
+    <span>${data.title}</span>
+  </li>`;
+    return listElement;
+  }
+};
+
 const removeHover = function (e) {
-  const liElements = sidebarScrollbar.querySelectorAll("li");
+  const liElements = e.currentTarget.querySelectorAll("li");
   liElements.forEach((li) => {
     li.classList.remove("hover-sidebar");
     li.classList.add("hide-before");
@@ -71,11 +93,11 @@ const hoverHandler = function (e) {
     e.target.classList.contains("default-list")
   ) {
     if (e.target.classList.contains("hide-before")) {
-      removeHover();
+      removeHover(e);
       e.target.classList.remove("hide-before");
       e.target.classList.add("hover-sidebar");
     } else if (e.target.classList.contains("hover-sidebar")) {
-      removeHover();
+      removeHover(e);
       e.target.classList.remove("hover-sidebar");
       e.target.classList.add("hide-before");
     }
@@ -83,6 +105,7 @@ const hoverHandler = function (e) {
 };
 
 (function () {
+  const sidebarScrollbar = document.querySelector(".sidebar-scrollbar");
   sidebarScrollbar.addEventListener("click", hoverHandler.bind(this));
   const addList = document.querySelector(".addList");
   addList.addEventListener("keydown", listHandler.bind(this));
