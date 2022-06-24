@@ -101,6 +101,11 @@ const hoverHandler = function (e) {
 (function () {
   const sidebarScrollbar = document.querySelector(".sidebar-scrollbar");
   sidebarScrollbar.addEventListener("click", hoverHandler.bind(this));
+  const newGroup = document.querySelector(".new-group");
+  newGroup.addEventListener("click", function () {
+    const placcce = document.querySelector(".group-placeholder");
+    placcce.classList.remove("hidden");
+  });
   const addList = document.querySelector(".addList");
   addList.addEventListener("keydown", listHandler.bind(this));
 })();

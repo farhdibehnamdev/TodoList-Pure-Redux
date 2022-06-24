@@ -246,7 +246,7 @@ input.search-task:focus::placeholder {
   bottom: 4px;
   z-index: 11;
   border-top: 2px #fff;
-  margin-top: 29px;
+  margin-top: 15px;
   background: inherit;
   padding-bottom: 30px;
   border-top: 1px solid #343434;
@@ -300,6 +300,26 @@ input.search-task:focus::placeholder {
 
 .new-group:hover {
   background-color: #2e2e2e;
+}
+
+.group-placeholder {
+  display: flex;
+  justify-content: ce;
+  align-items: center;
+  padding: 10px 15px 0px;
+  flex: 1;
+  gap: 20px;
+  border-top: 2px dotted #555252;
+  position: relative;
+}
+input.addGroup {
+  background: none;
+  outline: none;
+  padding: 10px;
+  border: 1px solid #706c6c;
+  border-radius: 3px;
+  flex: 1;
+  color: #fff;
 }
 
 /**************** 
