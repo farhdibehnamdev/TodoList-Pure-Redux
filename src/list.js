@@ -95,7 +95,11 @@ const createList = function (data) {
     return listElement;
   }
 };
-// <i class="ph-list-light ph-1x" style="color: #788cde"></i>
+/**
+ * This function create a group element
+ * @param {*} data The element data that is recived
+ * @returns The elment along with their data
+ */
 const createGroup = function (data) {
   const listElement = `<li class="group" draggable="true" data-id=${data.id}>
       <div>
@@ -116,7 +120,10 @@ const createGroupSection = function () {
   const groupPlaceholder = document.querySelector(".group-placeholder");
   groupPlaceholder.classList.remove("hidden");
 };
-
+/**
+ * This function remove hover that are on other elements.
+ * @param {*} e it's a mouse click event
+ */
 const removeHover = function (e) {
   const liElements = e.currentTarget.querySelectorAll("li");
   liElements.forEach((li) => {
@@ -124,6 +131,10 @@ const removeHover = function (e) {
     li.classList.add("hide-before");
   });
 };
+/**
+ * This function add hover element to current element.
+ * @param {*} e it's a mouse click event
+ */
 const hoverHandler = function (e) {
   if (
     e.target.classList.contains("list") ||
