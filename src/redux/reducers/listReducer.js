@@ -1,10 +1,16 @@
 import {
   ADD_LIST,
   SET_TASK_INTO_LIST,
-  SET_TASKS_COMLETED_INTO_LIST,
+  SET_TASKS_COMPLETED_INTO_LIST,
 } from "../constants/action-types.js";
 const initialState = {
-  "List-1": { id: "List-1", title: "Tasks", tasksId: [], completedTasks: {} },
+  "List-1": {
+    id: "List-1",
+    title: "Tasks",
+    tasksId: [],
+    completedTasks: {},
+    type: "List",
+  },
 };
 const list = function (state = initialState, action) {
   const listManipulation = function (prop) {
@@ -32,7 +38,7 @@ const list = function (state = initialState, action) {
     return [listId, newState];
   };
   switch (action.type) {
-    case SET_TASKS_COMLETED_INTO_LIST: {
+    case SET_TASKS_COMPLETED_INTO_LIST: {
       console.log("state ::: ", state);
       const [listId, newState] = listManipulation("completedTasks");
       return { ...state, [listId]: { ...newState } };
@@ -74,6 +80,7 @@ const list = function (state = initialState, action) {
           title: action.payload.title,
           tasksId: [],
           completedTasks: {},
+          type: "List",
         },
       };
       return {

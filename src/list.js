@@ -1,5 +1,5 @@
 import { generatedId } from "./libs/utils";
-import { addList } from "./redux/actions";
+import { addList, addGroup, addCollection } from "./redux/actions";
 import store from "./redux/store";
 const getNumberOfTasks = function (status) {
   const state = store.getState();
@@ -36,6 +36,11 @@ export const CountsOfImportantTask = function () {
 
 const addListToStore = function (id, title) {
   store.dispatch(addList(id, title));
+  store.dispatch(addCollection(id));
+};
+const addGroupToStore = function (id, title) {
+  store.dispatch(addGroup(id, title));
+  store.dispatch(addCollection(id));
 };
 
 const listHandler = function (event) {
@@ -48,15 +53,32 @@ const listHandler = function (event) {
     event.target.focus();
   }
 };
+const groupHandler = function (event) {
+  if (event.key === "Enter") {
+    let title = event.target.value;
+    if (!title || title.length < 1) return;
+    const id = generatedId("group-");
+    addGroupToStore(id, title);
+    event.target.value = "";
+    event.target.focus();
+  }
+};
+
 export const RenderList = function () {
-  let state = store.getState();
+  let { list, group, collections } = store.getState();
+  const groupList = { ...list, ...group };
   let html = "";
 
-  const list = Object.values(state?.list).map((data, index) => {
-    return createList({ id: data.id, title: data.title });
+  const lists = collections.map((data, index) => {
+    const currentRow = groupList[data.id];
+    if (currentRow.type === "Group")
+      return createGroup({ id: currentRow.id, title: currentRow.title });
+    else {
+      return createList({ id: currentRow.id, title: currentRow.title });
+    }
   });
-  if (list.length > 0) {
-    let joined = list.join("").replaceAll(",", "");
+  if (lists.length > 0) {
+    let joined = lists.join("").replaceAll(",", "");
     html += `<ul class="lists"> ${joined} </ul>`;
   }
 
@@ -72,6 +94,25 @@ const createList = function (data) {
   </li>`;
     return listElement;
   }
+};
+// <i class="ph-list-light ph-1x" style="color: #788cde"></i>
+const createGroup = function (data) {
+  const listElement = `<li class="group" draggable="true" data-id=${data.id}>
+      <div>
+      <div>
+          <i class="ph-folder-dotted-light ph-1x"></i>
+          <span>${data.title}</span>
+          </div>
+          <i class="ph-caret-down"></i>
+      </div>
+    <ul class="lists-dropped hidden"></ul>
+  </li>`;
+  return listElement;
+};
+
+const createGroupSection = function () {
+  const groupPlaceholder = document.querySelector(".group-placeholder");
+  groupPlaceholder.classList.remove("hidden");
 };
 
 const removeHover = function (e) {
@@ -100,12 +141,14 @@ const hoverHandler = function (e) {
 
 (function () {
   const sidebarScrollbar = document.querySelector(".sidebar-scrollbar");
-  sidebarScrollbar.addEventListener("click", hoverHandler.bind(this));
+  sidebarScrollbar.addEventListener("click", hoverHandler);
+
   const newGroup = document.querySelector(".new-group");
-  newGroup.addEventListener("click", function () {
-    const placcce = document.querySelector(".group-placeholder");
-    placcce.classList.remove("hidden");
-  });
+  newGroup.addEventListener("click", createGroupSection);
+
+  const addGroup = document.querySelector(".addGroup");
+  addGroup.addEventListener("keydown", groupHandler);
+
   const addList = document.querySelector(".addList");
-  addList.addEventListener("keydown", listHandler.bind(this));
+  addList.addEventListener("keydown", listHandler);
 })();
