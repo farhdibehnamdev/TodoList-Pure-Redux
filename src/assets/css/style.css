@@ -190,6 +190,7 @@ input.search-task:focus::placeholder {
 #list-placeholder .lists .list {
   list-style: none;
 }
+
 .list {
   display: flex;
   align-items: center;
@@ -199,9 +200,30 @@ input.search-task:focus::placeholder {
   position: relative;
   margin-bottom: 5px;
 }
+
 .list:hover {
   background-color: #343434;
 }
+
+.group {
+  align-items: center;
+  gap: 15px;
+  padding: 8px 5px 8px 19px;
+  border-radius: 5px;
+  position: relative;
+  margin-bottom: 5px;
+}
+.group:hover {
+  background-color: #343434;
+}
+
+.group div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
 .list::before {
   content: "|";
   font-size: 12px;

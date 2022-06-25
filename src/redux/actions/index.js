@@ -4,8 +4,10 @@ import {
   SET_TASK_IMPORTANT,
   SET_TASK_INTO_LIST,
   SET_TASK_STATUS,
-  SET_TASKS_COMLETED_INTO_LIST,
+  SET_TASKS_COMPLETED_INTO_LIST,
   ADD_LIST,
+  ADD_GROUP,
+  ADD_COLLECTION,
 } from "../constants/action-types.js";
 export const addTask = function (id, task) {
   return {
@@ -26,12 +28,31 @@ export const addList = function (id, title) {
     },
   };
 };
+
+export const addGroup = function (id, title) {
+  return {
+    type: ADD_GROUP,
+    payload: {
+      id,
+      title,
+    },
+  };
+};
 export const setTaskIntoList = function (taskId, activeListId) {
   return {
     type: SET_TASK_INTO_LIST,
     payload: {
       taskId,
       activeListId,
+    },
+  };
+};
+//TODO :::
+export const addCollection = function (id, type) {
+  return {
+    type: ADD_COLLECTION,
+    payload: {
+      id,
     },
   };
 };
@@ -56,7 +77,7 @@ export const setTasksCompletedIntoList = function (
   status
 ) {
   return {
-    type: SET_TASKS_COMLETED_INTO_LIST,
+    type: SET_TASKS_COMPLETED_INTO_LIST,
     payload: {
       taskId,
       activeListId,
