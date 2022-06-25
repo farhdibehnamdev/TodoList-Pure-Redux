@@ -105,7 +105,9 @@ const createGroup = function (data) {
           </div>
           <i class="ph-caret-down"></i>
       </div>
-    <ul class="lists-dropped hidden"></ul>
+      <ul class="lists-dropped">
+      <li class="gorup-body">Drag here to add lists</li>
+    </ul>
   </li>`;
   return listElement;
 };
