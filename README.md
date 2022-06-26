@@ -12,7 +12,7 @@ The [Todo List](https://farhdibehnamdev.github.io/TodoList-Pure-Redux/) is desig
 
 ### Screenshot
 
-![](./Screenshot.png)
+![](./screenshot.png)
 
 ### Links
 
