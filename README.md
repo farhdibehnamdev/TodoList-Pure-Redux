@@ -1,4 +1,4 @@
-The [Todo List](https://farhdibehnamdev.github.io/TodoList-Pure-Redux/) is designed to practice and explore HTML and CSS , JavaScript , Webapack , Redux ,...
+The [Todo List](https://zesty-khapse-cdf833.netlify.app/) is designed to practice and explore HTML and CSS , JavaScript , Webapack , Redux ,...
 
 ## Table of contents
 
@@ -16,7 +16,7 @@ The [Todo List](https://farhdibehnamdev.github.io/TodoList-Pure-Redux/) is desig
 
 ### Links
 
-- Live Site URL: [Todo List](https://farhdibehnamdev.github.io/TodoList-Pure-Redux/)
+- Live Site URL: [Todo List](https://zesty-khapse-cdf833.netlify.app/)
 
 ### Built with
 
