@@ -107,9 +107,9 @@ const createGroup = function (data) {
           <i class="ph-folder-dotted-light ph-1x"></i>
           <span>${data.title}</span>
           </div>
-          <i class="ph-caret-down"></i>
+          <i class="ph-caret-down openCloseLists"></i>
       </div>
-      <ul class="lists-dropped">
+      <ul class="lists-dropped hidden">
       <li class="gorup-body">Drag here to add lists</li>
     </ul>
   </li>`;
@@ -152,9 +152,29 @@ const hoverHandler = function (e) {
   }
 };
 
+const toggleListsDropped = function (e) {
+  if (e.target.classList.contains("openCloseLists")) {
+    const parentOfopenCloseListsClicked = e.target.closest("div");
+    const nextSiblingOfParent =
+      parentOfopenCloseListsClicked?.nextElementSibling;
+    if (nextSiblingOfParent.classList.contains("hidden")) {
+      nextSiblingOfParent.classList.remove("hidden");
+      e.target.classList.remove("ph-caret-down");
+      e.target.classList.add("ph-caret-up");
+    } else if (!nextSiblingOfParent.classList.contains("hidden")) {
+      nextSiblingOfParent.classList.add("hidden");
+      e.target.classList.remove("ph-caret-up");
+      e.target.classList.add("ph-caret-down");
+    }
+  }
+};
+
 (function () {
   const sidebarScrollbar = document.querySelector(".sidebar-scrollbar");
-  sidebarScrollbar.addEventListener("click", hoverHandler);
+  sidebarScrollbar.addEventListener("click", (e) => {
+    hoverHandler(e);
+    toggleListsDropped(e);
+  });
 
   const newGroup = document.querySelector(".new-group");
   newGroup.addEventListener("click", createGroupSection);
@@ -164,4 +184,7 @@ const hoverHandler = function (e) {
 
   const addList = document.querySelector(".addList");
   addList.addEventListener("keydown", listHandler);
+
+  // const openCloseLists = document.querySelector(".openCloseLists");
+  // openCloseLists?.addEventListener("click", toggleListsDropped);
 })();
