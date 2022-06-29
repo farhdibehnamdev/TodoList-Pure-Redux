@@ -152,6 +152,54 @@ const hoverHandler = function (e) {
   }
 };
 
+const dragStart = function (e) {
+  if (e.target.classList.contains("list")) {
+    e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
+    e.dataTransfer.setDragImage(e.target, 0, 0);
+  }
+};
+const dragOver = function (e) {
+  e.preventDefault();
+};
+const hideGroupBodyElement = function (element, sourceId) {
+  const groupBody = document.querySelector(".group-body");
+  const newList = element.classList.contains("lists-dropped")
+    ? element
+    : element.closest(".lists-dropped");
+  console.log("newList ::: ", newList);
+  newList?.appendChild(document.querySelector(`[data-id=${sourceId}]`));
+  newList
+    .querySelectorAll(".list")
+    .forEach((list) => list.classList.add("listlist"));
+  if (groupBody) {
+    groupBody.classList.add("group-body-hidebefore");
+    groupBody.classList.remove("group-body");
+    groupBody.innerHTML = "";
+    groupBody.style.listStyle = "none";
+  }
+};
+const dropped = function (e) {
+  e.preventDefault();
+  const sourceId = e.dataTransfer.getData(
+    "text/plain",
+    e.target.getAttribute("data-id")
+  );
+
+  if (e.target.classList.contains("group-body")) {
+    console.log("first ::::", e.target);
+    hideGroupBodyElement(e.target, sourceId);
+  } else if (e.target.classList.contains("listlist")) {
+    console.log("second ::::", e.target);
+    hideGroupBodyElement(e.target, sourceId);
+  } else if (e.target.classList.contains("lists-dropped")) {
+    console.log("third ::::", e.target);
+    hideGroupBodyElement(e.target, sourceId);
+  } else if (e.target.classList.contains("lists")) {
+    console.log("blah balh :::", e.target);
+    hideGroupBodyElement(e.target, sourceId);
+  }
+};
+
 const toggleListsDropped = function (e) {
   if (e.target.classList.contains("openCloseLists")) {
     const parentOfopenCloseListsClicked = e.target.closest("div");
@@ -185,6 +233,12 @@ const toggleListsDropped = function (e) {
   const addList = document.querySelector(".addList");
   addList.addEventListener("keydown", listHandler);
 
-  // const openCloseLists = document.querySelector(".openCloseLists");
-  // openCloseLists?.addEventListener("click", toggleListsDropped);
+  let source = document.querySelector(".lists");
+  let target =
+    document.querySelector(".group .lists-dropped") ||
+    document.querySelector("#list-placeholder .lists");
+  console.log("new Target :::", target);
+  source.addEventListener("dragstart", dragStart);
+  target.addEventListener("dragover", dragOver);
+  target.addEventListener("drop", dropped);
 })();
