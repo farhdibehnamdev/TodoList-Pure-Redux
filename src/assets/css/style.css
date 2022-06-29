@@ -43,7 +43,7 @@ section {
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex: 0 1 400px;
+  flex: 0 1 360px;
   height: 100vh;
   background-color: #222222;
   line-height: 1.5;
@@ -213,25 +213,41 @@ input.search-task:focus::placeholder {
   position: relative;
   margin-bottom: 5px;
 }
-.group:hover {
-  background-color: #343434;
-}
+/* .group:hover { */
+/* background-color: #343434; */
+/* } */
 
-.group div {
+.group .group-container {
   display: flex;
   justify-content: space-between;
   gap: 15px;
   align-items: center;
+  /* padding: 5px; */
+  border-radius: 5px;
+  padding: 8px 5px 8px 19px;
+  margin-left: -20px;
+  margin-right: -4px;
 }
+
+.group .group-container:hover {
+  background-color: #343434;
+}
+.group-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
 .lists-dropped {
   position: relative;
 }
-.gorup-body {
+.group-body {
   list-style: none;
   margin-left: 35px;
   padding: 20px 20px 5px;
 }
-.gorup-body::before {
+.group-body::before {
   content: "|";
   font-size: 10px;
   padding: 10px 0 0 0;
@@ -239,6 +255,10 @@ input.search-task:focus::placeholder {
   border-radius: 10px;
   position: absolute;
   left: 40px;
+}
+
+.group-body-hidebefore::before {
+  content: none;
 }
 
 .list::before {
@@ -254,6 +274,20 @@ input.search-task:focus::placeholder {
 .lists .list:active {
   transform: scale(0.98);
 }
+.listlist {
+  margin-top: 10px !important;
+  margin-left: -20px;
+  margin-right: -4px;
+}
+
+.listlist > i {
+  padding-left: 40px;
+}
+
+.listlist::before {
+  margin-left: 40px !important;
+}
+
 .hover-sidebar {
   background-color: #343434;
 }
