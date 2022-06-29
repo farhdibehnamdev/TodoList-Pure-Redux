@@ -227,6 +227,7 @@ input.search-task:focus::placeholder {
   padding: 8px 5px 8px 19px;
   margin-left: -20px;
   margin-right: -4px;
+  margin-bottom: 5px;
 }
 
 .group .group-container:hover {
@@ -275,7 +276,6 @@ input.search-task:focus::placeholder {
   transform: scale(0.98);
 }
 .listlist {
-  margin-top: 10px !important;
   margin-left: -20px;
   margin-right: -4px;
 }
