@@ -89,9 +89,13 @@ export const RenderList = function () {
 const createList = function (data) {
   if (data.title !== "Tasks") {
     const listElement = `<li class="list hide-before" draggable="true" data-id=${data.id}>
-    <i class="ph-list-light ph-1x" style="color: #788cde"></i>
-    <span>${data.title}</span>
-  </li>`;
+        <i class="ph-list-light ph-1x" style="color: #788cde"></i>
+        <span>${data.title}</span>
+      </li>`;
+    //   const listElement = `<li class="list hide-before" draggable="true" data-id=${data.id}>
+    //   <i class="ph-list-light ph-1x" style="color: #788cde"></i>
+    //   <span>${data.title}</span>
+    // </li>`;
     return listElement;
   }
 };
@@ -102,17 +106,29 @@ const createList = function (data) {
  */
 const createGroup = function (data) {
   const listElement = `<li class="group" draggable="true" data-id=${data.id}>
-      <div>
-      <div>
-          <i class="ph-folder-dotted-light ph-1x"></i>
-          <span>${data.title}</span>
-          </div>
-          <i class="ph-caret-down openCloseLists"></i>
-      </div>
-      <ul class="lists-dropped hidden">
-      <li class="gorup-body">Drag here to add lists</li>
-    </ul>
-  </li>`;
+  <div class="group-container">
+    <div>
+      <i class="ph-folder-dotted-light ph-1x"></i>
+      <span>${data.title}</span>
+    </div>
+    <i class="ph-caret-down"></i>
+  </div>
+  <ul class="lists-dropped">
+    <li class="group-body">Drag here to add lists</li>
+  </ul>
+</li>`;
+  // const listElement = `<li class="group" draggable="true" data-id=${data.id}>
+  //     <div class="group-container">
+  //     <div>
+  //         <i class="ph-folder-dotted-light ph-1x"></i>
+  //         <span>${data.title}</span>
+  //         </div>
+  //         <i class="ph-caret-down openCloseLists"></i>
+  //     </div>
+  //     <ul class="lists-dropped hidden">
+  //     <li class="gorup-body">Drag here to add lists</li>
+  //   </ul>
+  // </li>`;
   return listElement;
 };
 
@@ -132,7 +148,7 @@ const removeHover = function (e) {
   });
 };
 /**
- * This function add hover element to current element.
+ * This function add hover to current element.
  * @param {*} e it's a mouse click event
  */
 const hoverHandler = function (e) {
@@ -151,17 +167,8 @@ const hoverHandler = function (e) {
     }
   }
 };
-
-const dragStart = function (e) {
-  if (e.target.classList.contains("list")) {
-    e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
-    e.dataTransfer.setDragImage(e.target, 0, 0);
-  }
-};
-const dragOver = function (e) {
-  e.preventDefault();
-};
 const hideGroupBodyElement = function (element, sourceId) {
+  console.log("sourceID :::", sourceId);
   const groupBody = document.querySelector(".group-body");
   const newList = element.classList.contains("lists-dropped")
     ? element
@@ -178,6 +185,17 @@ const hideGroupBodyElement = function (element, sourceId) {
     groupBody.style.listStyle = "none";
   }
 };
+const dragStart = function (e) {
+  alert("alooooo");
+  if (e.target.classList.contains("list")) {
+    e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
+    e.dataTransfer.setDragImage(e.target, 0, 0);
+  }
+};
+const dragOver = function (e) {
+  e.preventDefault();
+};
+
 const dropped = function (e) {
   e.preventDefault();
   const sourceId = e.dataTransfer.getData(
@@ -234,10 +252,11 @@ const toggleListsDropped = function (e) {
   addList.addEventListener("keydown", listHandler);
 
   let source = document.querySelector(".lists");
-  let target =
-    document.querySelector(".group .lists-dropped") ||
-    document.querySelector("#list-placeholder .lists");
+  let target = document.querySelector("#list-placeholder");
+  // || document.querySelector("#list-placeholder .lists");
+
   console.log("new Target :::", target);
+  console.log("new source :::", source);
   source.addEventListener("dragstart", dragStart);
   target.addEventListener("dragover", dragOver);
   target.addEventListener("drop", dropped);
