@@ -168,8 +168,14 @@ const hoverHandler = function (e) {
   }
 };
 const hideGroupBodyElement = function (element, sourceId) {
-  console.log("sourceID :::", sourceId);
   const groupBody = document.querySelector(".group-body");
+  if (groupBody) {
+    groupBody.classList.add("group-body-hidebefore");
+    groupBody.classList.remove("group-body");
+    groupBody.innerHTML = "";
+    groupBody.style.listStyle = "none";
+  }
+  console.log("sourceID :::", sourceId);
   const newList = element.classList.contains("lists-dropped")
     ? element
     : element.closest(".lists-dropped");
@@ -178,15 +184,8 @@ const hideGroupBodyElement = function (element, sourceId) {
   newList
     .querySelectorAll(".list")
     .forEach((list) => list.classList.add("listlist"));
-  if (groupBody) {
-    groupBody.classList.add("group-body-hidebefore");
-    groupBody.classList.remove("group-body");
-    groupBody.innerHTML = "";
-    groupBody.style.listStyle = "none";
-  }
 };
 const dragStart = function (e) {
-  alert("alooooo");
   if (e.target.classList.contains("list")) {
     e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
     e.dataTransfer.setDragImage(e.target, 0, 0);
@@ -202,7 +201,6 @@ const dropped = function (e) {
     "text/plain",
     e.target.getAttribute("data-id")
   );
-
   if (e.target.classList.contains("group-body")) {
     console.log("first ::::", e.target);
     hideGroupBodyElement(e.target, sourceId);
@@ -251,8 +249,9 @@ const toggleListsDropped = function (e) {
   const addList = document.querySelector(".addList");
   addList.addEventListener("keydown", listHandler);
 
-  let source = document.querySelector(".lists");
-  let target = document.querySelector("#list-placeholder");
+  let source = document.querySelector("#list-placeholder");
+  let target = source;
+
   // || document.querySelector("#list-placeholder .lists");
 
   console.log("new Target :::", target);
