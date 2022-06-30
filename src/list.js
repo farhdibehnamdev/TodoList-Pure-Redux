@@ -168,14 +168,11 @@ const hoverHandler = function (e) {
   }
 };
 const hideGroupBodyElement = function (element, sourceId) {
-  const groupBody = document.querySelector(".group-body");
-  if (groupBody) {
-    groupBody.classList.add("group-body-hidebefore");
-    groupBody.classList.remove("group-body");
-    groupBody.innerHTML = "";
-    groupBody.style.listStyle = "none";
-  }
-  console.log("sourceID :::", sourceId);
+  const findGroupBody = element.closest("li.group");
+  const groupBody = findGroupBody.querySelector(".group-body");
+  groupBody.classList.add("hidden");
+  groupBody.innerHTML = "";
+  groupBody.style.listStyle = "none";
   const newList = element.classList.contains("lists-dropped")
     ? element
     : element.closest(".lists-dropped");
