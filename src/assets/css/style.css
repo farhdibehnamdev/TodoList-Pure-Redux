@@ -208,7 +208,7 @@ input.search-task:focus::placeholder {
 .group {
   align-items: center;
   gap: 15px;
-  padding: 8px 5px 8px 19px;
+  padding: 0 5px 0 19px;
   border-radius: 5px;
   position: relative;
   margin-bottom: 5px;
