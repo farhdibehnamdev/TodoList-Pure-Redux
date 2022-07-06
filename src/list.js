@@ -33,7 +33,11 @@ export const CountsOfImportantTask = function () {
     listTasks.classList.add("hidden");
   }
 };
-
+/**
+ * This function add list to store.
+ * @param {*} id This is a id parameter
+ * @param {*} title This is a title parameter
+ */
 const addListToStore = function (id, title) {
   store.dispatch(addList(id, title));
   store.dispatch(addCollection(id));
@@ -42,7 +46,11 @@ const addGroupToStore = function (id, title) {
   store.dispatch(addGroup(id, title));
   store.dispatch(addCollection(id));
 };
-
+/**
+ * This function take list's title from input.
+ * @param {*} event this is a input event.
+ * @returns
+ */
 const listHandler = function (event) {
   if (event.key === "Enter") {
     let title = event.target.value;
@@ -53,6 +61,12 @@ const listHandler = function (event) {
     event.target.focus();
   }
 };
+
+/**
+ * This function take groups's title from input.
+ * @param {*} event this is a input event.
+ * @returns
+ */
 const groupHandler = function (event) {
   if (event.key === "Enter") {
     let title = event.target.value;
@@ -63,7 +77,9 @@ const groupHandler = function (event) {
     event.target.focus();
   }
 };
-
+/**
+ * This function render lists in sidebar.
+ */
 export const RenderList = function () {
   let { list, group, collections } = store.getState();
   const groupList = { ...list, ...group };
@@ -167,22 +183,30 @@ const hoverHandler = function (e) {
     }
   }
 };
-const hideGroupBodyElement = function (element, sourceId) {
-  const findGroupBody = element.closest("li.group");
-  const groupBody = findGroupBody.querySelector(".group-body");
-  groupBody.classList.add("hidden");
-  groupBody.innerHTML = "";
-  groupBody.style.listStyle = "none";
+const addListToGroup = function (element, sourceId) {
   const newList = element.classList.contains("lists-dropped")
     ? element
     : element.closest(".lists-dropped");
-  console.log("newList ::: ", newList);
+
   newList?.appendChild(document.querySelector(`[data-id=${sourceId}]`));
   newList
     .querySelectorAll(".list")
     .forEach((list) => list.classList.add("listlist"));
 };
+//TODO :: search for neighbors groupbody
+const hideGroupBodyElement = function (element) {
+  const findGroupBody = element.closest("li.group");
+  const groupBody = findGroupBody.querySelector(".group-body");
+  groupBody.classList.add("hidden");
+  groupBody.innerHTML = "";
+  groupBody.style.listStyle = "none";
+};
+
+const checkIsListInGroup = function (e) {};
+
 const dragStart = function (e) {
+  // e.target.style.opacity = "1";
+  setTimeout(() => (e.target.style.opacity = 1), 1);
   if (e.target.classList.contains("list")) {
     e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
     e.dataTransfer.setDragImage(e.target, 0, 0);
@@ -200,16 +224,35 @@ const dropped = function (e) {
   );
   if (e.target.classList.contains("group-body")) {
     console.log("first ::::", e.target);
-    hideGroupBodyElement(e.target, sourceId);
+    hideGroupBodyElement(e.target);
+    addListToGroup(e.target, sourceId);
   } else if (e.target.classList.contains("listlist")) {
     console.log("second ::::", e.target);
-    hideGroupBodyElement(e.target, sourceId);
+    hideGroupBodyElement(e.target);
+    addListToGroup(e.target, sourceId);
   } else if (e.target.classList.contains("lists-dropped")) {
     console.log("third ::::", e.target);
-    hideGroupBodyElement(e.target, sourceId);
+    hideGroupBodyElement(e.target);
+    addListToGroup(e.target, sourceId);
   } else if (e.target.classList.contains("lists")) {
-    console.log("blah balh :::", e.target);
-    hideGroupBodyElement(e.target, sourceId);
+    console.log("blah blah :::", e.target);
+    hideGroupBodyElement(e.target);
+    addListToGroup(e.target, sourceId);
+  }
+};
+
+const dragLeave = function (e) {
+  console.log("dragLeave :::", e.target);
+  // if(e.target.classList.contains(''))
+  if (e.target.classList.contains("lists-dropped")) {
+    console.log("lists dropped");
+  } else if (e.target.classList.contains("groupBody")) {
+    const groupBodyParentElement = e.target.closest("ul");
+    const elements =
+      groupBodyParentElement.querySelectorAll(".lists-dropped > *");
+    if (elements.length <= 1 && e.target.classList.contains("hidden")) {
+      e.target.classList.remove("hidden");
+    }
   }
 };
 
@@ -254,6 +297,7 @@ const toggleListsDropped = function (e) {
   console.log("new Target :::", target);
   console.log("new source :::", source);
   source.addEventListener("dragstart", dragStart);
+  source.addEventListener("dragleave", dragLeave);
   target.addEventListener("dragover", dragOver);
   target.addEventListener("drop", dropped);
 })();
