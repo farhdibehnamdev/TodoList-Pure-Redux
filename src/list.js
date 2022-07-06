@@ -101,7 +101,11 @@ export const RenderList = function () {
   const listPlaceHolder = document.querySelector("#list-placeholder");
   listPlaceHolder.innerHTML = html;
 };
-
+/**
+ * This function create lists in sidebar.
+ * @param {*} data The data to create list.
+ * @returns
+ */
 const createList = function (data) {
   if (data.title !== "Tasks") {
     const listElement = `<li class="list hide-before" draggable="true" data-id=${data.id}>
@@ -183,6 +187,11 @@ const hoverHandler = function (e) {
     }
   }
 };
+/**
+ * This function add list to group.
+ * @param {*} element The element to addListToGroup
+ * @param {*} sourceId The sourceId to addListToGroup
+ */
 const addListToGroup = function (element, sourceId) {
   const newList = element.classList.contains("lists-dropped")
     ? element
@@ -193,7 +202,7 @@ const addListToGroup = function (element, sourceId) {
     .querySelectorAll(".list")
     .forEach((list) => list.classList.add("listlist"));
 };
-//TODO :: search for neighbors groupbody
+
 const hideGroupBodyElement = function (element) {
   const findGroupBody = element.closest("li.group");
   const groupBody = findGroupBody.querySelector(".group-body");
