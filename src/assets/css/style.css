@@ -453,8 +453,20 @@ input.addGroup {
   list-style: none;
 }
 
+.task-holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: inherit;
+  transition: all 0.3s;
+}
+
 .task .has-task:hover {
   background-color: #373737;
+}
+
+.squeeze {
+  transform: scale(0.98);
 }
 
 .icon-task-size {
