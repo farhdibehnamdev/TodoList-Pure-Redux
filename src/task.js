@@ -12,21 +12,25 @@ import audioAsset from "./assets/audios/CompletedSound.mp3";
 
 import { generatedId } from "./libs/utils";
 
-const squeezeTaskMouseDown = function (e) {
-  if (e.target.classList.contains("has-task")) {
+const toggleSqueeze = function (e, type) {
+  const hasTask = e.target.classList.contains("has-task");
+  const taskHolder = e.target.classList.contains("task-holder");
+  if (hasTask) {
     const taskHodler = e.target.querySelector(".task-holder");
-    taskHodler.classList.add("squeeze");
-  } else if (e.target.classList.contains("task-holder")) {
-    e.target.classList.add("squeeze");
+    type === "add"
+      ? taskHodler.classList.add("squeeze")
+      : taskHodler.classList.remove("squeeze");
+  } else if (taskHolder) {
+    type === "add"
+      ? e.target.classList.add("squeeze")
+      : e.target.classList.remove("squeeze");
   }
 };
+const squeezeTaskMouseDown = function (e) {
+  toggleSqueeze(e, "add");
+};
 const squeezeTaskMouseUp = function (e) {
-  if (e.target.classList.contains("has-task")) {
-    const taskHodler = e.target.querySelector(".task-holder");
-    taskHodler.classList.remove("squeeze");
-  } else if (e.target.classList.contains("task-holder")) {
-    e.target.classList.remove("squeeze");
-  }
+  toggleSqueeze(e, "remove");
 };
 
 const setTaskImportantHandler = function (e) {
