@@ -626,6 +626,15 @@ input.addGroup {
   text-align: center;
 }
 
+.task-details {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 360px;
+  height: 100vh;
+  line-height: 1.5;
+  background-color: #272727;
+}
+
 /*==============*/
 
 .hidden {
