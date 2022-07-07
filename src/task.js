@@ -12,6 +12,23 @@ import audioAsset from "./assets/audios/CompletedSound.mp3";
 
 import { generatedId } from "./libs/utils";
 
+const squeezeTaskMouseDown = function (e) {
+  if (e.target.classList.contains("has-task")) {
+    const taskHodler = e.target.querySelector(".task-holder");
+    taskHodler.classList.add("squeeze");
+  } else if (e.target.classList.contains("task-holder")) {
+    e.target.classList.add("squeeze");
+  }
+};
+const squeezeTaskMouseUp = function (e) {
+  if (e.target.classList.contains("has-task")) {
+    const taskHodler = e.target.querySelector(".task-holder");
+    taskHodler.classList.remove("squeeze");
+  } else if (e.target.classList.contains("task-holder")) {
+    e.target.classList.remove("squeeze");
+  }
+};
+
 const setTaskImportantHandler = function (e) {
   if (e.target.classList.contains("important-task-button")) {
     const taskId = e.target.closest("li").getAttribute("data-id");
@@ -75,6 +92,7 @@ const renderCompletedTasks = function (data) {
   }</span>
     </span> 
     </span>
+   
     <span class="important-task">
       <i class="${
         data?.important ? "ph-star-fill color-task-important" : "ph-star-bold"
@@ -169,6 +187,7 @@ const taskUI = function (data) {
   const taskElement = `
   <li class="task" draggable="true" data-id=${data?.id}>
   <p class="has-task">
+  <span class="task-holder">
 <span class="drag-icon-check-task">
 <i class="ph-dots-six-fill"></i>
 <span class="check-task-name">
@@ -184,6 +203,7 @@ const taskUI = function (data) {
       <i class="${
         data?.important ? "ph-star-fill color-task-important" : "ph-star-bold"
       } icon-task-size important-task-button"></i>
+    </span>
     </span>
   </p>
 </li>
@@ -214,6 +234,7 @@ export const AddTask = function () {
   const app = document.querySelector("#app");
   app.innerHTML = html;
 };
+
 //**********************************************/
 
 (function () {
@@ -231,6 +252,8 @@ export const AddTask = function () {
     setTaskImportantHandler(e);
     setTaskCompletedHandler(e);
   });
+  appElement.addEventListener("mousedown", (e) => squeezeTaskMouseDown(e));
+  appElement.addEventListener("mouseup", (e) => squeezeTaskMouseUp(e));
   appElement.addEventListener("mouseover", (e) => {
     hoverCompletedHandler(e);
   });
