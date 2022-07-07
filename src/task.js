@@ -214,7 +214,7 @@ export const AddTask = function () {
   const app = document.querySelector("#app");
   app.innerHTML = html;
 };
-//********************************************* */
+//**********************************************/
 
 (function () {
   document.addEventListener("submit", submitHandler, false);

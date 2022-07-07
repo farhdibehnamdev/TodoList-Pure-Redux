@@ -452,6 +452,11 @@ input.addGroup {
   padding: 3px 0 0 0;
   list-style: none;
 }
+
+.task .has-task:hover {
+  background-color: #373737;
+}
+
 .icon-task-size {
   font-size: 1.5rem;
 }
@@ -465,12 +470,6 @@ input.addGroup {
   background-color: #2a2a2a;
   padding: 15px;
 }
-/* 
-.task hr {
-  border: none;
-  height: 2px;
-  background-color: #262626;
-} */
 
 .has-task {
   display: flex;
