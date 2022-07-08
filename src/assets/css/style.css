@@ -626,6 +626,11 @@ input.addGroup {
   text-align: center;
 }
 
+/***************************** 
+ *                           *
+ * Task Details Section      *
+ *                           *
+******************************/
 .task-details {
   display: flex;
   flex-direction: column;
