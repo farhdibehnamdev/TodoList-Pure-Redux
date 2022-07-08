@@ -8,6 +8,7 @@ module.exports = {
       path.resolve(__dirname, "src/index.js"),
       path.resolve(__dirname, "src/task.js"),
       path.resolve(__dirname, "src/list.js"),
+      path.resolve(__dirname, "src/task-details.js"),
     ],
   },
   output: {
