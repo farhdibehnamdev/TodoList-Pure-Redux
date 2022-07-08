@@ -1,5 +1,6 @@
 import _ from "lodash";
 import store from "./redux/store";
+import appElement from "./common";
 import {
   addTask,
   setTaskImportant,
@@ -243,7 +244,7 @@ export const AddTask = function () {
 
 (function () {
   document.addEventListener("submit", submitHandler, false);
-  const appElement = document.querySelector(".main-tasks-container");
+
   const tasksCounterContainer = document.querySelector(
     ".collapse-completed-tasks"
   );
