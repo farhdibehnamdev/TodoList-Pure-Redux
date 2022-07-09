@@ -174,10 +174,6 @@ input.search-task:focus::placeholder {
   font-size: 10px;
   color: #e8e8e8;
 }
-.ph-1x {
-  font-size: 1.5em !important;
-  font-weight: 400 !important;
-}
 
 .line-splitter {
   border: none;
