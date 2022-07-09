@@ -178,6 +178,7 @@ input.search-task:focus::placeholder {
   font-size: 1.5em !important;
   font-weight: 400 !important;
 }
+
 .line-splitter {
   border: none;
   height: 1px;
@@ -637,33 +638,58 @@ input.addGroup {
   background-color: #272727;
 }
 
-.container-task-details-title {
+.task-details-title-section {
   background-color: #323232;
   padding: 12px;
   margin: 10px;
-  border-radius: 5px;
+  border-radius: 2px;
+}
+
+.close-task-details {
+  padding: 10px 0px 0px 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 5px 20px 10px 0;
 }
 
 .icon-title-task-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .icon-title-task-details div {
   display: flex;
   gap: 10px;
-  margin-bottom: 10px;
+  align-items: center;
 }
-.icon-title-task-details .title {
+
+.icon-title-task-details .title,
+.addStep {
   background: none;
   outline: none;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 0px 5px 0px 5px;
   color: #fff;
   flex: 1;
 }
+
+.task-details-addtask-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 5px;
+}
+
+.task-details-addtask-icon > i {
+  color: #e4e6f1;
+}
+.task-details-addtask-icon::placeholder {
+  color: #e4e6f1;
+}
+
 /*==============*/
 
 .hidden {
