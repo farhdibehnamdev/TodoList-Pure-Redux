@@ -514,15 +514,12 @@ input.addGroup {
 .add-task {
   display: flex;
   align-items: center;
-  /* position: -webkit-sticky;
-  position: sticky; */
   position: sticky;
   height: 150px;
   top: calc(100vh - 150px);
   bottom: 0;
-  width: 79vw;
   background-color: #1c1c1c;
-  padding: 10px 30px 50px 50px;
+  padding: 10px 55px 50px 55px;
 }
 
 .add-task input[type="text"] {
@@ -640,6 +637,33 @@ input.addGroup {
   background-color: #272727;
 }
 
+.container-task-details-title {
+  background-color: #323232;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.icon-title-task-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-title-task-details div {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.icon-title-task-details .title {
+  background: none;
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  flex: 1;
+}
 /*==============*/
 
 .hidden {
