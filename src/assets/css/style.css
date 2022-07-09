@@ -634,10 +634,11 @@ input.addGroup {
   background-color: #272727;
 }
 
-.task-details-title-section {
+.task-details-title-section,
+.task-details-addMyDay {
   background-color: #323232;
   padding: 12px;
-  margin: 10px;
+  margin: 10px 10px 5px 10px;
   border-radius: 2px;
 }
 
@@ -684,6 +685,13 @@ input.addGroup {
 }
 .task-details-addtask-icon::placeholder {
   color: #e4e6f1;
+}
+
+.task-details-addMyDay {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 15px;
 }
 
 /*==============*/
