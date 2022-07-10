@@ -635,7 +635,8 @@ input.addGroup {
 }
 
 .task-details-title-section,
-.task-details-addMyDay {
+.task-details-addMyDay,
+.task-details-date {
   background-color: #323232;
   padding: 12px;
   margin: 10px 10px 5px 10px;
@@ -687,11 +688,25 @@ input.addGroup {
   color: #e4e6f1;
 }
 
-.task-details-addMyDay {
+.task-details-addMyDay,
+.remind-me,
+.add-due-date,
+.repeate {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-left: 15px;
+}
+
+.task-details-date div {
+  line-height: 3;
+}
+
+.task-details-date div:not(:last-child) {
+  border-bottom: 1px solid #3b3b3b;
+}
+
+.padding-left-5px {
+  padding-left: 5px;
 }
 
 /*==============*/
