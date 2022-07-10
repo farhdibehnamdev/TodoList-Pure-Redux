@@ -723,6 +723,23 @@ input.addGroup {
   color: #fff;
 }
 
+.created-date-delete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  position: relative;
+  bottom: 30px;
+  padding: 12px 10px 12px 10px;
+
+  border-top: 1px solid #232323;
+}
+
+.delete-task,
+.created-date {
+  margin-left: auto;
+}
+
 /*==============*/
 
 .hidden {
