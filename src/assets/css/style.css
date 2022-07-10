@@ -641,7 +641,7 @@ input.addGroup {
 .add-file,
 .add-note {
   background-color: #323232;
-  padding: 12px;
+  padding: 15px;
   margin: 10px 10px 5px 10px;
   border-radius: 2px;
 }
@@ -653,7 +653,13 @@ input.addGroup {
   align-items: center;
   margin: 5px 20px 10px 0;
 }
-
+.close-task-details i {
+  padding: 10px;
+  border-radius: 2px;
+}
+.close-task-details i:hover {
+  background-color: #434343;
+}
 .icon-title-task-details {
   display: flex;
   justify-content: space-between;
@@ -702,9 +708,19 @@ input.addGroup {
   align-items: center;
   gap: 10px;
 }
+.task-details-addMyDay:hover,
+.delete-task:hover,
+.assign-to:hover,
+.add-file:hover {
+  background-color: #434343;
+}
 
 .task-details-date div {
   line-height: 3;
+}
+
+.task-details-date div:hover {
+  background-color: #434343;
 }
 
 .task-details-date div:not(:last-child) {
@@ -730,14 +746,17 @@ input.addGroup {
   margin-top: auto;
   position: relative;
   bottom: 30px;
-  padding: 12px 10px 12px 10px;
-
+  padding: 5px 0px 5px 5px;
   border-top: 1px solid #232323;
 }
 
 .delete-task,
 .created-date {
   margin-left: auto;
+}
+
+.delete-task {
+  padding: 10px;
 }
 
 /*==============*/
