@@ -633,6 +633,8 @@ input.addGroup {
   line-height: 1.5;
   background-color: #272727;
   position: relative;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .task-details-title-section,
