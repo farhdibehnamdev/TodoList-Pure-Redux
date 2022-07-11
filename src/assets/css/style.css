@@ -641,7 +641,7 @@ input.addGroup {
 .add-file,
 .add-note {
   background-color: #323232;
-  padding: 15px;
+  /* padding: 15px; */
   margin: 10px 10px 5px 10px;
   border-radius: 2px;
 }
@@ -664,7 +664,6 @@ input.addGroup {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .icon-title-task-details div {
@@ -687,7 +686,7 @@ input.addGroup {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-left: 5px;
+  /* padding-left: 5px; */
 }
 
 .task-details-addtask-icon > i {
@@ -728,9 +727,16 @@ input.addGroup {
 }
 
 .padding-left-5px {
-  padding-left: 5px;
+  padding: 15px;
 }
 
+.task-details-date div {
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+.task-details-title-section div {
+  padding-top: 5px;
+}
 .add-note textarea {
   background-color: #323232;
   border: none;
