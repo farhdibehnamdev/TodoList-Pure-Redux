@@ -729,7 +729,7 @@ input.addGroup {
   border-bottom: 1px solid #3b3b3b;
 }
 
-.padding-left-5px {
+.padding-15px {
   padding: 15px;
 }
 
@@ -769,7 +769,10 @@ input.addGroup {
 }
 
 .remind-me-menu {
-  /* position: absolute; */
+  position: absolute;
+  left: 20px;
+  top: 230px;
+  width: 240px;
   /* padding: 10px; */
   border-radius: 5px;
   background-color: #212121;
