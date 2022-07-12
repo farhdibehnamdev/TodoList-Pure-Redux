@@ -23,4 +23,6 @@ const closeOpenedMenu = function (e) {
   const taskDetailsDate = document.querySelector(".task-details-date");
   taskDetailsDate.addEventListener("click", openMenu);
   document.addEventListener("click", closeOpenedMenu);
+  const closeBtn = document.querySelector(".close-task-details");
+  closeBtn.addEventListener("click", toggleTaskDetailsPanel);
 })();
