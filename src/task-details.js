@@ -5,14 +5,13 @@ const toggleTaskDetailsPanel = function (e) {
 };
 
 const openMenu = function (e) {
-  console.log("hooo :::", e.target);
-  if (e.target.classList.contains("remind-me")) {
+  if (e.target.classList.contains("task-detail")) {
     const remindMenu = document.querySelector(".remind-me-menu");
     remindMenu && remindMenu.classList.toggle("hidden");
   }
 };
 const closeOpenedMenu = function (e) {
-  if (!e.target.classList.contains("remind-me")) {
+  if (!e.target.classList.contains("task-date")) {
     const menu = document.querySelector(".remind-me-menu");
     if (!menu.classList.contains("hidden")) {
       menu.classList.add("hidden");
