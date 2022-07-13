@@ -4,10 +4,20 @@ const toggleTaskDetailsPanel = function (e) {
   taskDetails.classList.toggle("hidden");
 };
 
+const toggleMenu = function (value) {
+  if (value) {
+    const element = document.querySelector(value);
+    element && element.classList.toggle("hidden");
+  }
+};
+
 const openMenu = function (e) {
-  if (e.target.classList.contains("task-detail")) {
-    const remindMenu = document.querySelector(".remind-me-menu");
-    remindMenu && remindMenu.classList.toggle("hidden");
+  if (e.target.classList.contains("remind-me")) {
+    toggleMenu(".remind-me-menu");
+  } else if (e.target.classList.contains("add-due-date")) {
+    toggleMenu(".add-due-date-menu");
+  } else if (e.target.classList.contains("repeat")) {
+    toggleMenu(".repeat-menu");
   }
 };
 const closeOpenedMenu = function (e) {

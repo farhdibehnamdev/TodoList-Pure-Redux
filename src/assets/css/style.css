@@ -767,7 +767,7 @@ input.addGroup {
 .delete-task {
   padding: 10px;
 }
-
+.add-due-date-menu,
 .remind-me-menu,
 .repeat-menu {
   position: absolute;
@@ -780,7 +780,10 @@ input.addGroup {
   margin: 40px;
   border: 1px solid #363636;
 }
-
+.add-due-date-menu {
+  top: 290px;
+}
+.add-due-date-menu li,
 .remind-me-menu li,
 .repeat-menu li {
   display: flex;
@@ -796,6 +799,7 @@ input.addGroup {
 .remind-me-menu li:last-child {
   border-top: 1px solid #363636;
 }
+.add-due-date-menu li:hover,
 .remind-me-menu li:hover,
 .repeat-menu li:hover {
   background-color: #3d3d40;
