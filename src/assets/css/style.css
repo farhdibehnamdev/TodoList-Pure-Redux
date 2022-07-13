@@ -772,7 +772,7 @@ input.addGroup {
 .repeat-menu {
   position: absolute;
   left: 20px;
-  top: 230px;
+  top: 240px;
   width: 240px;
   /* padding: 10px; */
   border-radius: 5px;
@@ -781,7 +781,10 @@ input.addGroup {
   border: 1px solid #363636;
 }
 .add-due-date-menu {
-  top: 290px;
+  top: 293px;
+}
+.repeat-menu {
+  top: 345px;
 }
 .add-due-date-menu li,
 .remind-me-menu li,

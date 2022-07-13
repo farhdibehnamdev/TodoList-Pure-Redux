@@ -5,6 +5,17 @@ const toggleTaskDetailsPanel = function (e) {
 };
 
 const toggleMenu = function (value) {
+  const dateMenu = document.querySelectorAll(".date-menu");
+
+  dateMenu.forEach((menu) => {
+    if (
+      !menu.classList.contains(value.slice(1)) &&
+      !menu.classList.contains("hidden")
+    ) {
+      menu.classList.add("hidden");
+    }
+  });
+
   if (value) {
     const element = document.querySelector(value);
     element && element.classList.toggle("hidden");
@@ -16,13 +27,13 @@ const openMenu = function (e) {
     toggleMenu(".remind-me-menu");
   } else if (e.target.classList.contains("add-due-date")) {
     toggleMenu(".add-due-date-menu");
-  } else if (e.target.classList.contains("repeat")) {
+  } else if (e.target.classList.contains("repeate")) {
     toggleMenu(".repeat-menu");
   }
 };
 const closeOpenedMenu = function (e) {
   if (!e.target.classList.contains("task-date")) {
-    const menu = document.querySelector(".remind-me-menu");
+    const menu = document.querySelector(".date-menu");
     if (!menu.classList.contains("hidden")) {
       menu.classList.add("hidden");
     }
