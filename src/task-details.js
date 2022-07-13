@@ -32,11 +32,15 @@ const openMenu = function (e) {
   }
 };
 const closeOpenedMenu = function (e) {
+  console.log("heeoo ::: ", e.target);
+
   if (!e.target.classList.contains("task-date")) {
-    const menu = document.querySelector(".date-menu");
-    if (!menu.classList.contains("hidden")) {
-      menu.classList.add("hidden");
-    }
+    const menus = document.querySelectorAll(".date-menu");
+    menus.forEach((menu) => {
+      if (!menu.classList.contains("hidden")) {
+        menu.classList.add("hidden");
+      }
+    });
   }
 };
 (function () {
